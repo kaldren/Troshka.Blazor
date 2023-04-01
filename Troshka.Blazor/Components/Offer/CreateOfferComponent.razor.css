@@ -1,0 +1,12 @@
+﻿#CreateOfferComponent {
+    display: flex;
+    flex-direction: column;
+}
+
+#CreateOfferComponent ::deep .rz-dropdown, .rz-dropdown {
+    margin: 0.5rem 0;
+}
+
+#CreateOfferComponent ::deep button {
+    margin: 1rem 0 0;
+}

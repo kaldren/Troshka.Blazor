@@ -1,0 +1,508 @@
+﻿@using Microsoft.Extensions.Localization;
+@using Troshka.Blazor.Models;
+@using Troshka.SPA.Localization;
+
+@inject IStringLocalizer<OfferResource> LocalizerOffer
+
+<div id="OfferFiltersComponent">
+    <RadzenButton Text="Clear" Click=@OnClearFiltersBtnClick />
+
+    <div class="CheckBoxFilters">
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.IsRegistered Change=@(args => Filters.IsRegistered = args) Name="@LocalizerOffer["Specification_IsRegistered"]" />
+            <RadzenLabel Text="@LocalizerOffer["Specification_IsRegistered"]" Component="@LocalizerOffer["Specification_IsRegistered"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasABS Change=@(args => Filters.HasABS = args) Name="@LocalizerOffer["Equipment_ABS"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_ABS"]" Component="@LocalizerOffer["Equipment_ABS"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasESP Change=@(args => Filters.HasESP = args) Name="@LocalizerOffer["Equipment_ESP"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_ESP"]" Component="@LocalizerOffer["Equipment_ESP"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasASR Change=@(args => Filters.HasASR = args) Name="@LocalizerOffer["Equipment_ASR"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_ASR"]" Component="@LocalizerOffer["Equipment_ASR"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasHillStartAssist Change=@(args => Filters.HasHillStartAssist = args) Name="@LocalizerOffer["Equipment_HillStartAssist"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_HillStartAssist"]" Component="@LocalizerOffer["Equipment_HillStartAssist"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasLaneChangeAssist Change=@(args => Filters.HasLaneChangeAssist = args) Name="@LocalizerOffer["Equipment_LaneChangeAssist"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_LaneChangeAssist"]" Component="@LocalizerOffer["Equipment_LaneChangeAssist"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasBlindSpotAssist Change=@(args => Filters.HasBlindSpotAssist = args) Name="@LocalizerOffer["Equipment_BlindSpotAssist"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_BlindSpotAssist"]" Component="@LocalizerOffer["Equipment_BlindSpotAssist"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasNightVisionAssist Change=@(args => Filters.HasNightVisionAssist = args) Name="@LocalizerOffer["Equipment_NightVisionAssist"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_NightVisionAssist"]" Component="@LocalizerOffer["Equipment_NightVisionAssist"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasEmergencyBrakeAssist Change=@(args => Filters.HasEmergencyBrakeAssist = args) Name="@LocalizerOffer["Equipment_EmergencyBrakeAssist"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_EmergencyBrakeAssist"]" Component="@LocalizerOffer["Equipment_EmergencyBrakeAssist"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasEmergencyCallSystem Change=@(args => Filters.HasEmergencyCallSystem = args) Name="@LocalizerOffer["Equipment_EmergencyCallSystem"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_EmergencyCallSystem"]" Component="@LocalizerOffer["Equipment_EmergencyCallSystem"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasTrafficSignRecognition Change=@(args => Filters.HasTrafficSignRecognition = args) Name="@LocalizerOffer["Equipment_TrafficSignRecognition"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_TrafficSignRecognition"]" Component="@LocalizerOffer["Equipment_TrafficSignRecognition"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasCruiseControl Change=@(args => Filters.HasCruiseControl = args) Name="@LocalizerOffer["Equipment_CruiseControl"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_CruiseControl"]" Component="@LocalizerOffer["Equipment_CruiseControl"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasAdaptiveCruiseControl Change=@(args => Filters.HasAdaptiveCruiseControl = args) Name="@LocalizerOffer["Equipment_AdaptiveCruiseControl"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_AdaptiveCruiseControl"]" Component="@LocalizerOffer["Equipment_AdaptiveCruiseControl"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasSpeedLimitControlSystem Change=@(args => Filters.HasSpeedLimitControlSystem = args) Name="@LocalizerOffer["Equipment_SpeedLimitControlSystem"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_SpeedLimitControlSystem"]" Component="@LocalizerOffer["Equipment_SpeedLimitControlSystem"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasDistanceWarningSystem Change=@(args => Filters.HasDistanceWarningSystem = args) Name="@LocalizerOffer["Equipment_DistanceWarningSystem"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_DistanceWarningSystem"]" Component="@LocalizerOffer["Equipment_DistanceWarningSystem"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasDriverAirbag Change=@(args => Filters.HasDriverAirbag = args) Name="@LocalizerOffer["Equipment_DriverAirbag"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_DriverAirbag"]" Component="@LocalizerOffer["Equipment_DriverAirbag"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasFrontAirbags Change=@(args => Filters.HasFrontAirbags = args) Name="@LocalizerOffer["Equipment_FrontAirbags"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_FrontAirbags"]" Component="@LocalizerOffer["Equipment_FrontAirbags"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasFrontAndSideAirbags Change=@(args => Filters.HasFrontAndSideAirbags = args) Name="@LocalizerOffer["Equipment_FrontAndSideAirbags"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_FrontAndSideAirbags"]" Component="@LocalizerOffer["Equipment_FrontAndSideAirbags"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasFrontAndSideAndMoreAirbags Change=@(args => Filters.HasFrontAndSideAndMoreAirbags = args) Name="@LocalizerOffer["Equipment_FrontAndSideAndMoreAirbags"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_FrontAndSideAndMoreAirbags"]" Component="@LocalizerOffer["Equipment_FrontAndSideAndMoreAirbags"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasIsofix Change=@(args => Filters.HasIsofix = args) Name="@LocalizerOffer["Equipment_Isofix"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_Isofix"]" Component="@LocalizerOffer["Equipment_Isofix"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasBiXenonHeadlights Change=@(args => Filters.HasBiXenonHeadlights = args) Name="@LocalizerOffer["Equipment_BiXenonHeadlights"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_BiXenonHeadlights"]" Component="@LocalizerOffer["Equipment_BiXenonHeadlights"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasLaserHeadlights Change=@(args => Filters.HasLaserHeadlights = args) Name="@LocalizerOffer["Equipment_LaserHeadlights"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_LaserHeadlights"]" Component="@LocalizerOffer["Equipment_LaserHeadlights"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasLedHeadlights Change=@(args => Filters.HasLedHeadlights = args) Name="@LocalizerOffer["Equipment_LedHeadlights"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_LedHeadlights"]" Component="@LocalizerOffer["Equipment_LedHeadlights"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasXenonHeadlights Change=@(args => Filters.HasXenonHeadlights = args) Name="@LocalizerOffer["Equipment_XenonHeadlights"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_XenonHeadlights"]" Component="@LocalizerOffer["Equipment_XenonHeadlights"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasHeadlightWasherSystem Change=@(args => Filters.HasHeadlightWasherSystem = args) Name="@LocalizerOffer["Equipment_HeadlightWasherSystem"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_HeadlightWasherSystem"]" Component="@LocalizerOffer["Equipment_HeadlightWasherSystem"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasGlareFreeHighBeamHeadlights Change=@(args => Filters.HasGlareFreeHighBeamHeadlights = args) Name="@LocalizerOffer["Equipment_GlareFreeHighBeamHeadlights"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_GlareFreeHighBeamHeadlights"]" Component="@LocalizerOffer["Equipment_GlareFreeHighBeamHeadlights"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasHighBeamAssist Change=@(args => Filters.HasHighBeamAssist = args) Name="@LocalizerOffer["Equipment_HighBeamAssist"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_HighBeamAssist"]" Component="@LocalizerOffer["Equipment_HighBeamAssist"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasAdaptiveCorneringLights Change=@(args => Filters.HasAdaptiveCorneringLights = args) Name="@LocalizerOffer["Equipment_AdaptiveCorneringLights"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_AdaptiveCorneringLights"]" Component="@LocalizerOffer["Equipment_AdaptiveCorneringLights"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasAdaptiveLighting Change=@(args => Filters.HasAdaptiveLighting = args) Name="@LocalizerOffer["Equipment_AdaptiveLighting"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_AdaptiveLighting"]" Component="@LocalizerOffer["Equipment_AdaptiveLighting"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasFogLamps Change=@(args => Filters.HasFogLamps = args) Name="@LocalizerOffer["Equipment_FogLamps"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_FogLamps"]" Component="@LocalizerOffer["Equipment_FogLamps"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasAlarm Change=@(args => Filters.HasAlarm = args) Name="@LocalizerOffer["Equipment_Alarm"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_Alarm"]" Component="@LocalizerOffer["Equipment_Alarm"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasEngineImobilizer Change=@(args => Filters.HasEngineImobilizer = args) Name="@LocalizerOffer["Equipment_EngineImobilizer"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_EngineImobilizer"]" Component="@LocalizerOffer["Equipment_EngineImobilizer"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasAirConditioner Change=@(args => Filters.HasAirConditioner = args) Name="@LocalizerOffer["Equipment_AirConditioner"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_AirConditioner"]" Component="@LocalizerOffer["Equipment_AirConditioner"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasClimateControl Change=@(args => Filters.HasClimateControl = args) Name="@LocalizerOffer["Equipment_ClimateControl"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_ClimateControl"]" Component="@LocalizerOffer["Equipment_ClimateControl"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasHeatedWindshield Change=@(args => Filters.HasHeatedWindshield = args) Name="@LocalizerOffer["Equipment_HeatedWindshield"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_HeatedWindshield"]" Component="@LocalizerOffer["Equipment_HeatedWindshield"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasHeatedSteeringWheel Change=@(args => Filters.HasHeatedSteeringWheel = args) Name="@LocalizerOffer["Equipment_HeatedSteeringWheel"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_HeatedSteeringWheel"]" Component="@LocalizerOffer["Equipment_HeatedSteeringWheel"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasSelfSteeringSystems Change=@(args => Filters.HasSelfSteeringSystems = args) Name="@LocalizerOffer["Equipment_SelfSteeringSystems"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_SelfSteeringSystems"]" Component="@LocalizerOffer["Equipment_SelfSteeringSystems"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasFrontParkAssistant Change=@(args => Filters.HasFrontParkAssistant = args) Name="@LocalizerOffer["Equipment_FrontParkAssistant"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_FrontParkAssistant"]" Component="@LocalizerOffer["Equipment_FrontParkAssistant"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasRearParkAssistant Change=@(args => Filters.HasRearParkAssistant = args) Name="@LocalizerOffer["Equipment_RearParkAssistant"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_RearParkAssistant"]" Component="@LocalizerOffer["Equipment_RearParkAssistant"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasCameraAssistant Change=@(args => Filters.HasCameraAssistant = args) Name="@LocalizerOffer["Equipment_CameraAssistant"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_CameraAssistant"]" Component="@LocalizerOffer["Equipment_CameraAssistant"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.Has360DegreeCameraAssistant Change=@(args => Filters.Has360DegreeCameraAssistant = args) Name="@LocalizerOffer["Equipment_360DegreeCameraAssistant"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_360DegreeCameraAssistant"]" Component="@LocalizerOffer["Equipment_360DegreeCameraAssistant"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasFrontHeatedSeats Change=@(args => Filters.HasFrontHeatedSeats = args) Name="@LocalizerOffer["Equipment_FrontHeatedSeats"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_FrontHeatedSeats"]" Component="@LocalizerOffer["Equipment_FrontHeatedSeats"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasBackHeatedSeats Change=@(args => Filters.HasBackHeatedSeats = args) Name="@LocalizerOffer["Equipment_BackHeatedSeats"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_BackHeatedSeats"]" Component="@LocalizerOffer["Equipment_BackHeatedSeats"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasFrontAdjustableSeats Change=@(args => Filters.HasFrontAdjustableSeats = args) Name="@LocalizerOffer["Equipment_FrontAdjustableSeats"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_FrontAdjustableSeats"]" Component="@LocalizerOffer["Equipment_FrontAdjustableSeats"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasBackAdjustableSeats Change=@(args => Filters.HasBackAdjustableSeats = args) Name="@LocalizerOffer["Equipment_BackAdjustableSeats"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_BackAdjustableSeats"]" Component="@LocalizerOffer["Equipment_BackAdjustableSeats"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasSportSeats Change=@(args => Filters.HasSportSeats = args) Name="@LocalizerOffer["Equipment_SportSeats"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_SportSeats"]" Component="@LocalizerOffer["Equipment_SportSeats"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasArmRest Change=@(args => Filters.HasArmRest = args) Name="@LocalizerOffer["Equipment_ArmRest"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_ArmRest"]" Component="@LocalizerOffer["Equipment_ArmRest"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasMassageSeats Change=@(args => Filters.HasMassageSeats = args) Name="@LocalizerOffer["Equipment_MassageSeats"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_MassageSeats"]" Component="@LocalizerOffer["Equipment_MassageSeats"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasSeatVentilation Change=@(args => Filters.HasSeatVentilation = args) Name="@LocalizerOffer["Equipment_SeatVentilation"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_SeatVentilation"]" Component="@LocalizerOffer["Equipment_SeatVentilation"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasElectricWindows Change=@(args => Filters.HasElectricWindows = args) Name="@LocalizerOffer["Equipment_ElectricWindows"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_ElectricWindows"]" Component="@LocalizerOffer["Equipment_ElectricWindows"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasElectricSideMirror Change=@(args => Filters.HasElectricSideMirror = args) Name="@LocalizerOffer["Equipment_ElectricSideMirror"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_ElectricSideMirror"]" Component="@LocalizerOffer["Equipment_ElectricSideMirror"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasElectricTailgate Change=@(args => Filters.HasElectricTailgate = args) Name="@LocalizerOffer["Equipment_ElectricTailgate"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_ElectricTailgate"]" Component="@LocalizerOffer["Equipment_ElectricTailgate"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasCentralLocking Change=@(args => Filters.HasCentralLocking = args) Name="@LocalizerOffer["Equipment_CentralLocking"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_CentralLocking"]" Component="@LocalizerOffer["Equipment_CentralLocking"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasKeylessCentralLocking Change=@(args => Filters.HasKeylessCentralLocking = args) Name="@LocalizerOffer["Equipment_KeylessCentralLocking"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_KeylessCentralLocking"]" Component="@LocalizerOffer["Equipment_KeylessCentralLocking"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasLightSensor Change=@(args => Filters.HasLightSensor = args) Name="@LocalizerOffer["Equipment_LightSensor"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_LightSensor"]" Component="@LocalizerOffer["Equipment_LightSensor"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasRainSensor Change=@(args => Filters.HasRainSensor = args) Name="@LocalizerOffer["Equipment_RainSensor"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_RainSensor"]" Component="@LocalizerOffer["Equipment_RainSensor"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasPowerAssistedSteering Change=@(args => Filters.HasPowerAssistedSteering = args) Name="@LocalizerOffer["Equipment_PowerAssistedSteering"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_PowerAssistedSteering"]" Component="@LocalizerOffer["Equipment_PowerAssistedSteering"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasAmbientLighting Change=@(args => Filters.HasAmbientLighting = args) Name="@LocalizerOffer["Equipment_AmbientLighting"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_AmbientLighting"]" Component="@LocalizerOffer["Equipment_AmbientLighting"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasLeatherSteeringWheel Change=@(args => Filters.HasLeatherSteeringWheel = args) Name="@LocalizerOffer["Equipment_LeatherSteeringWheel"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_LeatherSteeringWheel"]" Component="@LocalizerOffer["Equipment_LeatherSteeringWheel"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasRadio Change=@(args => Filters.HasRadio = args) Name="@LocalizerOffer["Equipment_Radio"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_Radio"]" Component="@LocalizerOffer["Equipment_Radio"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasCDPlayer Change=@(args => Filters.HasCDPlayer = args) Name="@LocalizerOffer["Equipment_CDPlayer"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_CDPlayer"]" Component="@LocalizerOffer["Equipment_CDPlayer"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasTV Change=@(args => Filters.HasTV = args) Name="@LocalizerOffer["Equipment_TV"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_TV"]" Component="@LocalizerOffer["Equipment_TV"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasNavigationSystem Change=@(args => Filters.HasNavigationSystem = args) Name="@LocalizerOffer["Equipment_NavigationSystem"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_NavigationSystem"]" Component="@LocalizerOffer["Equipment_NavigationSystem"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasSoundSystem Change=@(args => Filters.HasSoundSystem = args) Name="@LocalizerOffer["Equipment_SoundSystem"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_SoundSystem"]" Component="@LocalizerOffer["Equipment_SoundSystem"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasTouchScreen Change=@(args => Filters.HasTouchScreen = args) Name="@LocalizerOffer["Equipment_TouchScreen"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_TouchScreen"]" Component="@LocalizerOffer["Equipment_TouchScreen"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasVoiceControl Change=@(args => Filters.HasVoiceControl = args) Name="@LocalizerOffer["Equipment_VoiceControl"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_VoiceControl"]" Component="@LocalizerOffer["Equipment_VoiceControl"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasMultifunctionSteeringWheel Change=@(args => Filters.HasMultifunctionSteeringWheel = args) Name="@LocalizerOffer["Equipment_MultifunctionSteeringWheel"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_MultifunctionSteeringWheel"]" Component="@LocalizerOffer["Equipment_MultifunctionSteeringWheel"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasHandsfreeKit Change=@(args => Filters.HasHandsfreeKit = args) Name="@LocalizerOffer["Equipment_HandsfreeKit"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_HandsfreeKit"]" Component="@LocalizerOffer["Equipment_HandsfreeKit"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasUSBPort Change=@(args => Filters.HasUSBPort = args) Name="@LocalizerOffer["Equipment_USBPort"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_USBPort"]" Component="@LocalizerOffer["Equipment_USBPort"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasBluetooth Change=@(args => Filters.HasBluetooth = args) Name="@LocalizerOffer["Equipment_Bluetooth"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_Bluetooth"]" Component="@LocalizerOffer["Equipment_Bluetooth"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasAppleCarPlay Change=@(args => Filters.HasAppleCarPlay = args) Name="@LocalizerOffer["Equipment_AppleCarPlay"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_AppleCarPlay"]" Component="@LocalizerOffer["Equipment_AppleCarPlay"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasAndroidAuto Change=@(args => Filters.HasAndroidAuto = args) Name="@LocalizerOffer["Equipment_AndroidAuto"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_AndroidAuto"]" Component="@LocalizerOffer["Equipment_AndroidAuto"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasOnboardComputer Change=@(args => Filters.HasOnboardComputer = args) Name="@LocalizerOffer["Equipment_OnboardComputer"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_OnboardComputer"]" Component="@LocalizerOffer["Equipment_OnboardComputer"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasHeadupDisplay Change=@(args => Filters.HasHeadupDisplay = args) Name="@LocalizerOffer["Equipment_HeadupDisplay"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_HeadupDisplay"]" Component="@LocalizerOffer["Equipment_HeadupDisplay"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasDigitalCockpit Change=@(args => Filters.HasDigitalCockpit = args) Name="@LocalizerOffer["Equipment_DigitalCockpit"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_DigitalCockpit"]" Component="@LocalizerOffer["Equipment_DigitalCockpit"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasSummerTires Change=@(args => Filters.HasSummerTires = args) Name="@LocalizerOffer["Equipment_SummerTires"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_SummerTires"]" Component="@LocalizerOffer["Equipment_SummerTires"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasWinterTires Change=@(args => Filters.HasWinterTires = args) Name="@LocalizerOffer["Equipment_WinterTires"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_WinterTires"]" Component="@LocalizerOffer["Equipment_WinterTires"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasAllSeasonTires Change=@(args => Filters.HasAllSeasonTires = args) Name="@LocalizerOffer["Equipment_AllSeasonTires"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_AllSeasonTires"]" Component="@LocalizerOffer["Equipment_AllSeasonTires"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasEmergencyTire Change=@(args => Filters.HasEmergencyTire = args) Name="@LocalizerOffer["Equipment_EmergencyTire"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_EmergencyTire"]" Component="@LocalizerOffer["Equipment_EmergencyTire"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasEmergencyTireKit Change=@(args => Filters.HasEmergencyTireKit = args) Name="@LocalizerOffer["Equipment_EmergencyTireKit"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_EmergencyTireKit"]" Component="@LocalizerOffer["Equipment_EmergencyTireKit"]" />
+        </div>
+
+        <div class="CheckBoxFilter">
+            <RadzenCheckBox TValue="bool" Value=@Filters.HasPanoramicRoof Change=@(args => Filters.HasPanoramicRoof = args) Name="@LocalizerOffer["Equipment_PanoramicRoof"]" />
+            <RadzenLabel Text="@LocalizerOffer["Equipment_PanoramicRoof"]" Component="@LocalizerOffer["Equipment_PanoramicRoof"]" />
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public OfferFiltersModel Filters { get; set; }
+
+    void OnClearFiltersBtnClick()
+    {
+        Filters.IsRegistered = false;
+        Filters.HasABS = false;
+        Filters.HasESP = false;
+        Filters.HasASR = false;
+        Filters.HasHillStartAssist = false;
+        Filters.HasFatigueWarningSystem = false;
+        Filters.HasLaneChangeAssist = false;
+        Filters.HasBlindSpotAssist = false;
+        Filters.HasNightVisionAssist = false;
+        Filters.HasEmergencyBrakeAssist = false;
+        Filters.HasEmergencyCallSystem = false;
+        Filters.HasTrafficSignRecognition = false;
+        Filters.HasCruiseControl = false;
+        Filters.HasAdaptiveCruiseControl = false;
+        Filters.HasSpeedLimitControlSystem = false;
+        Filters.HasDistanceWarningSystem = false;
+        Filters.HasDriverAirbag = false;
+        Filters.HasFrontAirbags = false;
+        Filters.HasFrontAndSideAirbags = false;
+        Filters.HasFrontAndSideAndMoreAirbags = false;
+        Filters.HasIsofix = false;
+        Filters.HasBiXenonHeadlights = false;
+        Filters.HasLaserHeadlights = false;
+        Filters.HasLedHeadlights = false;
+        Filters.HasXenonHeadlights = false;
+        Filters.HasHeadlightWasherSystem = false;
+        Filters.HasGlareFreeHighBeamHeadlights = false;
+        Filters.HasHighBeamAssist = false;
+        Filters.HasAdaptiveCorneringLights = false;
+        Filters.HasAdaptiveLighting = false;
+        Filters.HasFogLamps = false;
+        Filters.HasAlarm = false;
+        Filters.HasEngineImobilizer = false;
+        Filters.HasAirConditioner = false;
+        Filters.HasClimateControl = false;
+        Filters.HasHeatedWindshield = false;
+        Filters.HasHeatedSteeringWheel = false;
+        Filters.HasSelfSteeringSystems = false;
+        Filters.HasFrontParkAssistant = false;
+        Filters.HasRearParkAssistant = false;
+        Filters.HasCameraAssistant = false;
+        Filters.Has360DegreeCameraAssistant = false;
+        Filters.HasFrontHeatedSeats = false;
+        Filters.HasBackHeatedSeats = false;
+        Filters.HasFrontAdjustableSeats = false;
+        Filters.HasBackAdjustableSeats = false;
+        Filters.HasSportSeats = false;
+        Filters.HasArmRest = false;
+        Filters.HasMassageSeats = false;
+        Filters.HasSeatVentilation = false;
+        Filters.HasElectricWindows = false;
+        Filters.HasElectricSideMirror = false;
+        Filters.HasElectricTailgate = false;
+        Filters.HasCentralLocking = false;
+        Filters.HasKeylessCentralLocking = false;
+        Filters.HasLightSensor = false;
+        Filters.HasRainSensor = false;
+        Filters.HasPowerAssistedSteering = false;
+        Filters.HasAmbientLighting = false;
+        Filters.HasLeatherSteeringWheel = false;
+        Filters.HasRadio = false;
+        Filters.HasCDPlayer = false;
+        Filters.HasTV = false;
+        Filters.HasNavigationSystem = false;
+        Filters.HasSoundSystem = false;
+        Filters.HasTouchScreen = false;
+        Filters.HasVoiceControl = false;
+        Filters.HasMultifunctionSteeringWheel = false;
+        Filters.HasHandsfreeKit = false;
+        Filters.HasUSBPort = false;
+        Filters.HasBluetooth = false;
+        Filters.HasAppleCarPlay = false;
+        Filters.HasAndroidAuto = false;
+        Filters.HasOnboardComputer = false;
+        Filters.HasHeadupDisplay = false;
+        Filters.HasDigitalCockpit = false;
+        Filters.HasSummerTires = false;
+        Filters.HasWinterTires = false;
+        Filters.HasAllSeasonTires = false;
+        Filters.HasEmergencyTire = false;
+        Filters.HasEmergencyTireKit = false;
+        Filters.HasPanoramicRoof = false;
+    }
+}

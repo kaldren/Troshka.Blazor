@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="_content/Radzen.Blazor/css/default-base.css">
     <link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css">
-    <link href="css/site.css" rel="stylesheet" />
     <link href="Troshka.Blazor.styles.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="favicon.png"/>
+    <link href="css/site.css" rel="stylesheet" />
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>
@@ -32,5 +32,12 @@
     </div>
 
     <script src="_framework/blazor.server.js"></script>
+    <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+    <script>
+        window.appCulture = {
+            get: () => window.localStorage['AppLanguage'],
+            set: (value) => window.localStorage['AppLanguage'] = value
+        };
+    </script>
 </body>
 </html>

@@ -66,3 +66,12 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+
+
+/*Custom*/
+.rz-dialog.Filters {
+    width: 1400px !important;
+    max-width: 100% !important;
+}

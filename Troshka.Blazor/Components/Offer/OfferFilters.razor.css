@@ -1,0 +1,13 @@
+﻿#OfferFiltersComponent .CheckBoxFilters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#OfferFiltersComponent .CheckBoxFilters .CheckBoxFilter {
+    margin: 0.5rem;
+}
+
+#OfferFiltersComponent .CheckBoxFilters ::deep .CheckBoxFilter .rz-chkbox {
+    margin: 0.3rem;
+}

@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Automatic" xml:space="preserve">
+    <value>Автоматични</value>
+  </data>
+  <data name="Equipment_360DegreeCameraAssistant" xml:space="preserve">
+    <value>360 градусов асистент за камера</value>
+  </data>
+  <data name="Equipment_ABS" xml:space="preserve">
+    <value>ABS</value>
+  </data>
+  <data name="Equipment_AdaptiveCorneringLights" xml:space="preserve">
+    <value>Адаптивни светлини за завой</value>
+  </data>
+  <data name="Equipment_AdaptiveCruiseControl" xml:space="preserve">
+    <value>Адаптивен круиз контрол</value>
+  </data>
+  <data name="Equipment_AdaptiveLighting" xml:space="preserve">
+    <value>Адаптивно осветление</value>
+  </data>
+  <data name="Equipment_AirConditioner" xml:space="preserve">
+    <value>Климатик</value>
+  </data>
+  <data name="Equipment_Alarm" xml:space="preserve">
+    <value>Аларма</value>
+  </data>
+  <data name="Equipment_AllSeasonTires" xml:space="preserve">
+    <value>Всесезонни гуми</value>
+  </data>
+  <data name="Equipment_AmbientLighting" xml:space="preserve">
+    <value>Околно осветление</value>
+  </data>
+  <data name="Equipment_AndroidAuto" xml:space="preserve">
+    <value>Android Auto</value>
+  </data>
+  <data name="Equipment_AppleCarPlay" xml:space="preserve">
+    <value>Apple CarPlay</value>
+  </data>
+  <data name="Equipment_ArmRest" xml:space="preserve">
+    <value>Подлакътник</value>
+  </data>
+  <data name="Equipment_ASR" xml:space="preserve">
+    <value>ASR</value>
+  </data>
+  <data name="Equipment_BackAdjustableSeats" xml:space="preserve">
+    <value>Седалки с регулируема облегалка</value>
+  </data>
+  <data name="Equipment_BackHeatedSeats" xml:space="preserve">
+    <value>Отопление на задните седалки</value>
+  </data>
+  <data name="Equipment_BiXenonHeadlights" xml:space="preserve">
+    <value>Биксенонови фарове</value>
+  </data>
+  <data name="Equipment_BlindSpotAssist" xml:space="preserve">
+    <value>Асистент за мъртва точка</value>
+  </data>
+  <data name="Equipment_Bluetooth" xml:space="preserve">
+    <value>Bluetooth</value>
+  </data>
+  <data name="Equipment_CameraAssistant" xml:space="preserve">
+    <value>Помощник за камерата</value>
+  </data>
+  <data name="Equipment_CDPlayer" xml:space="preserve">
+    <value>CD плейър</value>
+  </data>
+  <data name="Equipment_CentralLocking" xml:space="preserve">
+    <value>Централно заключване</value>
+  </data>
+  <data name="Equipment_ClimateControl" xml:space="preserve">
+    <value>Климатроник</value>
+  </data>
+  <data name="Equipment_CruiseControl" xml:space="preserve">
+    <value>Круиз контрол</value>
+  </data>
+  <data name="Equipment_DigitalCockpit" xml:space="preserve">
+    <value>Дигитален дисплей</value>
+  </data>
+  <data name="Equipment_DistanceWarningSystem" xml:space="preserve">
+    <value>Система за предупреждение за разстояние</value>
+  </data>
+  <data name="Equipment_DriverAirbag" xml:space="preserve">
+    <value>Въздушна възглавница за водача</value>
+  </data>
+  <data name="Equipment_ElectricSideMirror" xml:space="preserve">
+    <value>Електрическо странично огледало</value>
+  </data>
+  <data name="Equipment_ElectricTailgate" xml:space="preserve">
+    <value>Електрическа задна врата</value>
+  </data>
+  <data name="Equipment_ElectricWindows" xml:space="preserve">
+    <value>Електрически прозорци</value>
+  </data>
+  <data name="Equipment_EmergencyBrakeAssist" xml:space="preserve">
+    <value>Асистент за аварийно спиране</value>
+  </data>
+  <data name="Equipment_EmergencyCallSystem" xml:space="preserve">
+    <value>Система за спешни повиквания</value>
+  </data>
+  <data name="Equipment_EmergencyTire" xml:space="preserve">
+    <value>Аварийна гума</value>
+  </data>
+  <data name="Equipment_EmergencyTireKit" xml:space="preserve">
+    <value>Авариен комплект за гуми</value>
+  </data>
+  <data name="Equipment_EngineImobilizer" xml:space="preserve">
+    <value>Engine Imobilizer</value>
+  </data>
+  <data name="Equipment_ESP" xml:space="preserve">
+    <value>ESP</value>
+  </data>
+  <data name="Equipment_FatigueWarningSystem" xml:space="preserve">
+    <value>Система за предупреждение за умора</value>
+  </data>
+  <data name="Equipment_FogLamps" xml:space="preserve">
+    <value>Фарове за мъгла</value>
+  </data>
+  <data name="Equipment_FrontAdjustableSeats" xml:space="preserve">
+    <value>Предни регулируеми седалки</value>
+  </data>
+  <data name="Equipment_FrontAirbags" xml:space="preserve">
+    <value>Предни въздушни възглавници</value>
+  </data>
+  <data name="Equipment_FrontAndSideAirbags" xml:space="preserve">
+    <value>Предни и странични въздушни възглавници</value>
+  </data>
+  <data name="Equipment_FrontAndSideAndMoreAirbags" xml:space="preserve">
+    <value>Предни и странични и още въздушни възглавници</value>
+  </data>
+  <data name="Equipment_FrontHeatedSeats" xml:space="preserve">
+    <value>Предни отопляеми седалки</value>
+  </data>
+  <data name="Equipment_FrontParkAssistant" xml:space="preserve">
+    <value>Асистент за предно паркиране</value>
+  </data>
+  <data name="Equipment_GlareFreeHighBeamHeadlights" xml:space="preserve">
+    <value>Дълги светлини без отблясъци</value>
+  </data>
+  <data name="Equipment_HandsfreeKit" xml:space="preserve">
+    <value>Комплект за свободни ръце (Handsfree)</value>
+  </data>
+  <data name="Equipment_HasIsofix" xml:space="preserve">
+    <value>Isofix</value>
+  </data>
+  <data name="Equipment_HeadlightWasherSystem" xml:space="preserve">
+    <value>Система за измиване на фаровете</value>
+  </data>
+  <data name="Equipment_HeadupDisplay" xml:space="preserve">
+    <value>Heads Up дисплей</value>
+  </data>
+  <data name="Equipment_HeatedSteeringWheel" xml:space="preserve">
+    <value>Отопляем волан</value>
+  </data>
+  <data name="Equipment_HeatedWindshield" xml:space="preserve">
+    <value>Отопляемо предно стъкло</value>
+  </data>
+  <data name="Equipment_HighBeamAssist" xml:space="preserve">
+    <value>Асистент за дълги светлини</value>
+  </data>
+  <data name="Equipment_HillStartAssist" xml:space="preserve">
+    <value>Асистент за потегляне по наклон</value>
+  </data>
+  <data name="Equipment_KeylessCentralLocking" xml:space="preserve">
+    <value>Централно заключване без ключ</value>
+  </data>
+  <data name="Equipment_LaneChangeAssist" xml:space="preserve">
+    <value>Асистент за смяна на лентата</value>
+  </data>
+  <data name="Equipment_LaserHeadlights" xml:space="preserve">
+    <value>Лазерни фарове</value>
+  </data>
+  <data name="Equipment_LeatherSteeringWheel" xml:space="preserve">
+    <value>Кожен волан</value>
+  </data>
+  <data name="Equipment_LedHeadlights" xml:space="preserve">
+    <value>LED фарове</value>
+  </data>
+  <data name="Equipment_LightSensor" xml:space="preserve">
+    <value>Светлинен сензор</value>
+  </data>
+  <data name="Equipment_MassageSeats" xml:space="preserve">
+    <value>Масажни седалки</value>
+  </data>
+  <data name="Equipment_MultifunctionSteeringWheel" xml:space="preserve">
+    <value>Мултифункционален волан</value>
+  </data>
+  <data name="Equipment_NavigationSystem" xml:space="preserve">
+    <value>Навигационна система</value>
+  </data>
+  <data name="Equipment_NightVisionAssist" xml:space="preserve">
+    <value>Асистент за нощно виждане</value>
+  </data>
+  <data name="Equipment_OnboardComputer" xml:space="preserve">
+    <value>Бордови компютър</value>
+  </data>
+  <data name="Equipment_PanoramicRoof" xml:space="preserve">
+    <value>Панорамен покрив</value>
+  </data>
+  <data name="Equipment_PowerAssistedSteering" xml:space="preserve">
+    <value>Усилвател на волана</value>
+  </data>
+  <data name="Equipment_Radio" xml:space="preserve">
+    <value>Радио</value>
+  </data>
+  <data name="Equipment_RainSensor" xml:space="preserve">
+    <value>Сензор за дъжд</value>
+  </data>
+  <data name="Equipment_RearParkAssistant" xml:space="preserve">
+    <value>Асистент за задно паркиране</value>
+  </data>
+  <data name="Equipment_SeatVentilation" xml:space="preserve">
+    <value>Вентилация на седалката</value>
+  </data>
+  <data name="Equipment_SelfSteeringSystems" xml:space="preserve">
+    <value>Системи за самонасочване</value>
+  </data>
+  <data name="Equipment_SoundSystem" xml:space="preserve">
+    <value>Звукова система</value>
+  </data>
+  <data name="Equipment_SpeedLimitControlSystem" xml:space="preserve">
+    <value>Система за контрол на ограничението на скоростта</value>
+  </data>
+  <data name="Equipment_SportSeats" xml:space="preserve">
+    <value>Спортни седалки</value>
+  </data>
+  <data name="Equipment_SummerTires" xml:space="preserve">
+    <value>Летни Гуми</value>
+  </data>
+  <data name="Equipment_TouchScreen" xml:space="preserve">
+    <value>Тъч скрийн</value>
+  </data>
+  <data name="Equipment_TrafficSignRecognition" xml:space="preserve">
+    <value>Разпознаване на пътни знаци</value>
+  </data>
+  <data name="Equipment_TV" xml:space="preserve">
+    <value>TV</value>
+  </data>
+  <data name="Equipment_USBPort" xml:space="preserve">
+    <value>USB порт</value>
+  </data>
+  <data name="Equipment_VoiceControl" xml:space="preserve">
+    <value>Гласов контрол</value>
+  </data>
+  <data name="Equipment_WinterTires" xml:space="preserve">
+    <value>Зимни гуми</value>
+  </data>
+  <data name="Equipment_XenonHeadlights" xml:space="preserve">
+    <value>Ксенонови фарове</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Филтри</value>
+  </data>
+  <data name="HorsepowerShort" xml:space="preserve">
+    <value>кс</value>
+  </data>
+  <data name="KilometersShort" xml:space="preserve">
+    <value>км</value>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>Ръчни</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Населено място</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Регион</value>
+  </data>
+  <data name="SeeOfferButton" xml:space="preserve">
+    <value>Виж обявата</value>
+  </data>
+  <data name="Semi-automatic" xml:space="preserve">
+    <value>Полуавтоматични</value>
+  </data>
+  <data name="Specification_Brand" xml:space="preserve">
+    <value>Марка</value>
+  </data>
+  <data name="Specification_Category" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="Specification_Color" xml:space="preserve">
+    <value>Цвят</value>
+  </data>
+  <data name="Specification_Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Specification_Doors" xml:space="preserve">
+    <value>Врати</value>
+  </data>
+  <data name="Specification_Engine" xml:space="preserve">
+    <value>Двигател</value>
+  </data>
+  <data name="Specification_Euro" xml:space="preserve">
+    <value>Евростандарт</value>
+  </data>
+  <data name="Specification_Extras_Additional_Title" xml:space="preserve">
+    <value>Допълнителни</value>
+  </data>
+  <data name="Specification_Extras_Comfort_Title" xml:space="preserve">
+    <value>Комфорт</value>
+  </data>
+  <data name="Specification_Extras_Devices_Title" xml:space="preserve">
+    <value>Устройства</value>
+  </data>
+  <data name="Specification_Extras_Main_Title" xml:space="preserve">
+    <value>Основни</value>
+  </data>
+  <data name="Specification_Extras_Title" xml:space="preserve">
+    <value>Екстри</value>
+  </data>
+  <data name="Specification_FirstRegistration" xml:space="preserve">
+    <value>Първа регистрация</value>
+  </data>
+  <data name="Specification_HorsePowers" xml:space="preserve">
+    <value>Мощност (кс)</value>
+  </data>
+  <data name="Specification_InteriorColor" xml:space="preserve">
+    <value>Интериор (цвят)</value>
+  </data>
+  <data name="Specification_InteriorMaterial" xml:space="preserve">
+    <value>Интериор (материал)</value>
+  </data>
+  <data name="Specification_IsRegistered" xml:space="preserve">
+    <value>Регистрирана</value>
+  </data>
+  <data name="Specification_IsRegistered_No" xml:space="preserve">
+    <value>Не</value>
+  </data>
+  <data name="Specification_IsRegistered_Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="Specification_Mileage" xml:space="preserve">
+    <value>Километри</value>
+  </data>
+  <data name="Specification_Model" xml:space="preserve">
+    <value>Модел</value>
+  </data>
+  <data name="Specification_Price" xml:space="preserve">
+    <value>Цена</value>
+  </data>
+  <data name="Specification_Seats" xml:space="preserve">
+    <value>Седалки</value>
+  </data>
+  <data name="Specification_Title" xml:space="preserve">
+    <value>Технически спецификации</value>
+  </data>
+  <data name="Specification_Transmission" xml:space="preserve">
+    <value>Скорости</value>
+  </data>
+  <data name="Specification_Year" xml:space="preserve">
+    <value>Година</value>
+  </data>
+  <data name="TransmissionPlural" xml:space="preserve">
+    <value>скорости</value>
+  </data>
+  <data name="Vehicle_Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="NoResultsFound" xml:space="preserve">
+    <value>Не са намерени резултати с тези филтри.</value>
+  </data>
+</root>

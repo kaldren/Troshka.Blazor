@@ -9,11 +9,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Components\Offer\CreateOfferComponent.razor.css" />
+    <None Remove="Components\Offer\OfferFilters.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Components\Offer\CreateOfferComponent.razor.css" />
+    <Content Include="Components\Offer\OfferFilters.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.2" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.Identity.Web" Version="1.24.1" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.16.0" />
     <PackageReference Include="Radzen.Blazor" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Localization\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

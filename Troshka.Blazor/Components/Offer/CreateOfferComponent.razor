@@ -1,5 +1,74 @@
-﻿<h3>Форма за създаване на обява</h3>
+﻿@using Troshka.Blazor.Models;
+
+@inject DialogService DialogService
+
+<div id="CreateOfferComponent">
+    <h3>Форма за създаване на обява</h3>
+
+    <RadzenDropDown @bind-Value=@categoryValue Data=@categories />
+    <RadzenDropDown @bind-Value=@brandValue Data=@brands />
+    <RadzenDropDown @bind-Value=@modelValue Data=@models />
+    <RadzenTextArea Placeholder="Описание..." />
+    <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
+    <RadzenButton Text="Публикувай" ButtonStyle="ButtonStyle.Primary" />
+</div>
 
 @code {
+    private CreateOfferRequestModel _carModel = new();
 
+    string categoryValue = "Автомобили";
+    string brandValue = "";
+    string modelValue = "";
+    IEnumerable<string> categories;
+    IEnumerable<string> brands;
+    IEnumerable<string> models;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        InitCategories();
+        InitBrands();
+        InitModels();
+
+    }
+
+    private void InitCategories()
+    {
+        categories = new List<string> {
+            "Автомобили",
+            "Бусове",
+            "Мотори",
+            "Камиони",
+            "Каравани",
+            "Лодки",
+            "Строителни",
+            "Селскостопански",
+            "Ремаркета",
+            "Части и аксесоари",
+            "Гуми и джанти"
+        };
+    }
+    private void InitBrands()
+    {
+        brands = new List<string> {
+            "Audi",
+            "BMW",
+            "Mercedes-Benz"
+        };
+    }
+    private void InitModels()
+    {
+        brands = new List<string> {
+            "A6",
+            "A8",
+            "S8"
+        };
+    }
+    async Task ShowFiltersDialog()
+    {
+        await DialogService.OpenAsync("Филтри", ds =>
+            @<OfferFilters Filters=_carModel.Filters />,
+            new DialogOptions() { CloseDialogOnOverlayClick = true, CssClass = "Filters" });
+    }
 }

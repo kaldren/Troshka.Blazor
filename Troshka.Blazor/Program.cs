@@ -1,11 +1,8 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
+using Radzen;
+using System.Globalization;
 using Troshka.Blazor.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +23,18 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor()
     .AddMicrosoftIdentityConsentHandler();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services.AddScoped<DialogService>();
+
+#region Localization
+builder.Services.AddLocalization(options => options.ResourcesPath = "Localization");
+var supportedCultures = new List<CultureInfo> { new CultureInfo("en"), new CultureInfo("bg") };
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
+    options.SupportedUICultures = supportedCultures;
+});
+#endregion
 
 var app = builder.Build();
 
