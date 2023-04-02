@@ -1,10 +1,12 @@
 ﻿@using Troshka.Blazor.Models;
+@using Troshka.Blazor.Models.Brand;
 @using Troshka.Blazor.Models.Category;
+@using Troshka.Blazor.Models.Model;
 @using Troshka.Blazor.Models.Offer;
 @using Troshka.Blazor.Services.Category;
 
 @inject DialogService DialogService
-@inject ICategoryService CategoryService
+@inject IModelService CategoryService
 
 <div id="CreateOfferComponent">
     <RadzenDropDown @bind-Value=categoryValue Data=@categories TextProperty="Name" ValueProperty="Id" />
@@ -22,35 +24,17 @@
     string brandValue = "";
     string modelValue = "";
     List<CategoryModel>? categories;
-    IEnumerable<string> brands;
-    IEnumerable<string> models;
+    List<BrandModel>? brands;
+    List<ModelModel>? models;
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
 
         categories = await CategoryService.GetAll();
-        InitBrands();
-        InitModels();
 
     }
 
-    private void InitBrands()
-    {
-        brands = new List<string> {
-            "Audi",
-            "BMW",
-            "Mercedes-Benz"
-        };
-    }
-    private void InitModels()
-    {
-        brands = new List<string> {
-            "A6",
-            "A8",
-            "S8"
-        };
-    }
     async Task ShowFiltersDialog()
     {
         await DialogService.OpenAsync("Филтри", ds =>
