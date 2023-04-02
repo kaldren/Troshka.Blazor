@@ -1,9 +1,13 @@
 ﻿@using Troshka.Blazor.Models;
+@using Troshka.Blazor.Models.Category;
+@using Troshka.Blazor.Models.Offer;
+@using Troshka.Blazor.Services.Category;
 
 @inject DialogService DialogService
+@inject ICategoryService CategoryService
 
 <div id="CreateOfferComponent">
-    <RadzenDropDown @bind-Value=@categoryValue Data=@categories />
+    <RadzenDropDown @bind-Value=categoryValue Data=@categories TextProperty="Name" ValueProperty="Id" />
     <RadzenDropDown @bind-Value=@brandValue Data=@brands />
     <RadzenDropDown @bind-Value=@modelValue Data=@models />
     <RadzenTextArea Placeholder="Описание..." />
@@ -14,10 +18,10 @@
 @code {
     private CreateOfferRequestModel _carModel = new();
 
-    string categoryValue = "Автомобили";
+    string categoryValue = "";
     string brandValue = "";
     string modelValue = "";
-    IEnumerable<string> categories;
+    List<CategoryModel>? categories;
     IEnumerable<string> brands;
     IEnumerable<string> models;
 
@@ -25,28 +29,12 @@
     {
         await base.OnInitializedAsync();
 
-        InitCategories();
+        categories = await CategoryService.GetAll();
         InitBrands();
         InitModels();
 
     }
 
-    private void InitCategories()
-    {
-        categories = new List<string> {
-            "Автомобили",
-            "Бусове",
-            "Мотори",
-            "Камиони",
-            "Каравани",
-            "Лодки",
-            "Строителни",
-            "Селскостопански",
-            "Ремаркета",
-            "Части и аксесоари",
-            "Гуми и джанти"
-        };
-    }
     private void InitBrands()
     {
         brands = new List<string> {

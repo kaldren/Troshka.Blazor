@@ -1,4 +1,4 @@
-﻿namespace Troshka.Blazor.Models
+﻿namespace Troshka.Blazor.Models.Offer
 {
     public class OfferFiltersModel
     {
