@@ -10,7 +10,8 @@
 
 @inject DialogService DialogService
 @inject ICategoryService CategoryService
-@inject IBrandService BrandService
+@inject ICarBrandService CarBrandService
+@inject ICarModelService CarModelService
 
 <div id="CreateCarOfferComponent">
     <RadzenDropDown @bind-Value=categoryValue Data=@categories TextProperty="Name" ValueProperty="Id" />
@@ -36,7 +37,8 @@
         await base.OnInitializedAsync();
 
         categories = await CategoryService.GetAll();
-        brands = await BrandService.GetAll();
+        brands = await CarBrandService.GetAll();
+        models = await CarModelService.GetAll();
 
     }
 

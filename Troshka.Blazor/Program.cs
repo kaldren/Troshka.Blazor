@@ -33,8 +33,10 @@ builder.Services.AddDbContextFactory<TroshkaDbContext>(opt =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<DialogService>();
+
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<ICarBrandService, CarBrandService>();
+builder.Services.AddScoped<ICarModelService, CarModelService>();
 
 #region Localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Localization");

@@ -3,6 +3,7 @@ using Troshka.Blazor.Domain.Entities;
 using Troshka.Blazor.Domain.Entities.Car;
 using Troshka.Blazor.Models.Brand;
 using Troshka.Blazor.Models.Category;
+using Troshka.Blazor.Models.Model;
 
 namespace Troshka.Blazor
 {
@@ -12,6 +13,7 @@ namespace Troshka.Blazor
         {
             CreateMap<CategoryEntity, CategoryModel>();
             CreateMap<CarBrandEntity, BrandModel>();
+            CreateMap<CarModelEntity, ModelModel>();
         }
     }
 }

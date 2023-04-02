@@ -2,28 +2,28 @@
 using Microsoft.EntityFrameworkCore;
 using Troshka.Blazor.Domain.Entities.Car;
 using Troshka.Blazor.Infrastructure.Data;
-using Troshka.Blazor.Models.Brand;
+using Troshka.Blazor.Models.Model;
 
 namespace Troshka.Blazor.Services.Category
 {
-    public class BrandService : IBrandService
+    public class CarModelService : ICarModelService
     {
         private readonly IDbContextFactory<TroshkaDbContext> _dbFactory;
         private readonly IMapper _mapper;
 
-        public BrandService(IDbContextFactory<TroshkaDbContext> dbFactory, IMapper mapper)
+        public CarModelService(IDbContextFactory<TroshkaDbContext> dbFactory, IMapper mapper)
         {
             _dbFactory = dbFactory;
             _mapper = mapper;
         }
 
-        public async Task<List<BrandModel>> GetAll()
+        public async Task<List<ModelModel>> GetAll()
         {
             using var context = _dbFactory.CreateDbContext();
 
-            List<CarBrandEntity> categories = await context.CarBrands.AsNoTracking().ToListAsync();
+            List<CarModelEntity> categories = await context.CarModels.AsNoTracking().ToListAsync();
 
-            return _mapper.Map<List<BrandModel>>(categories);
+            return _mapper.Map<List<ModelModel>>(categories);
         }
     }
 }
