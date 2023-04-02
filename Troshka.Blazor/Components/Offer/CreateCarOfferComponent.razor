@@ -1,16 +1,20 @@
-﻿@using Troshka.Blazor.Models;
+﻿@using Radzen;
+@using Troshka.Blazor.Models;
 @using Troshka.Blazor.Models.Brand;
 @using Troshka.Blazor.Models.Category;
 @using Troshka.Blazor.Models.Model;
 @using Troshka.Blazor.Models.Offer;
 @using Troshka.Blazor.Services.Category;
 
-@inject DialogService DialogService
-@inject IModelService CategoryService
+@namespace Troshka.Blazor.Components.Offer
 
-<div id="CreateOfferComponent">
+@inject DialogService DialogService
+@inject ICategoryService CategoryService
+@inject IBrandService BrandService
+
+<div id="CreateCarOfferComponent">
     <RadzenDropDown @bind-Value=categoryValue Data=@categories TextProperty="Name" ValueProperty="Id" />
-    <RadzenDropDown @bind-Value=@brandValue Data=@brands />
+    <RadzenDropDown @bind-Value=@brandValue Data=@brands TextProperty="Name" ValueProperty="Id" />
     <RadzenDropDown @bind-Value=@modelValue Data=@models />
     <RadzenTextArea Placeholder="Описание..." />
     <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
@@ -32,6 +36,7 @@
         await base.OnInitializedAsync();
 
         categories = await CategoryService.GetAll();
+        brands = await BrandService.GetAll();
 
     }
 

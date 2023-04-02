@@ -27,13 +27,6 @@ builder.Services.AddServerSideBlazor()
     .AddMicrosoftIdentityConsentHandler();
 builder.Services.AddSingleton<WeatherForecastService>();
 
-//builder.Services.AddDbContext<TroshkaDbContext>(options =>
-//{
-//    options.UseLazyLoadingProxies();
-//    options.UseSqlServer(builder.Configuration.GetValue<string>("Troshka:ConnectionString"));
-//    //options.UseNpgsql(builder.Configuration.GetValue<string>("ConnectionStrings:TroshkaContext"));
-//    //options.UseInMemoryDatabase("Troshka");
-//});
 builder.Services.AddDbContextFactory<TroshkaDbContext>(opt =>
         opt.UseSqlServer(builder.Configuration.GetValue<string>("Troshka:ConnectionString")));
 
@@ -41,6 +34,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
 
 #region Localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Localization");

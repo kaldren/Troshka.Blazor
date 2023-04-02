@@ -7,6 +7,7 @@ namespace Troshka.Blazor.Infrastructure.Data
     public class TroshkaDbContext : DbContext
     {
         public DbSet<CategoryEntity> Category { get; set; }
+        public DbSet<CarBrandEntity> CarBrands { get; set; }
 
         public TroshkaDbContext(DbContextOptions<TroshkaDbContext> options) : base(options)
         {

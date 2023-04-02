@@ -1,9 +1,9 @@
-﻿using Troshka.Blazor.Models.Category;
+﻿using Troshka.Blazor.Models.Brand;
 
 namespace Troshka.Blazor.Services.Category
 {
     public interface IBrandService
     {
-        Task<List<CategoryModel>> GetAll();
+        Task<List<BrandModel>> GetAll();
     }
 }

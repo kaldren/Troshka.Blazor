@@ -1,10 +1,39 @@
 ﻿@page "/create-offer"
 @using Troshka.Blazor.Components.Offer
 
-<h3>Публикувай обява</h3>
+<div id="CreateOffer">
+    <h3>Публикувай обява</h3>
 
-<CreateOfferComponent />
+    <div class="OfferButtonOptions">
+        <RadzenButton Click=@(args => OnCarsClick()) Text="Коли" ButtonStyle="ButtonStyle.Primary" />
+        <RadzenButton Click=@(args => OnBusesClick()) Text="Бусове" ButtonStyle="ButtonStyle.Primary" />
+        <RadzenButton Click=@(args => OnMotorcyclesClick()) Text="Мотори" ButtonStyle="ButtonStyle.Primary" />
+        <RadzenButton Click=@(args => OnTrucksClick()) Text="Камиони" ButtonStyle="ButtonStyle.Primary" />
+        <RadzenButton Click=@(args => OnCaravansClick()) Text="Каравани" ButtonStyle="ButtonStyle.Primary" />
+        <RadzenButton Click=@(args => OnBoatsClick()) Text="Лодки" ButtonStyle="ButtonStyle.Primary" />
+        <RadzenButton Click=@(args => OnConstructionClick()) Text="Строителни" ButtonStyle="ButtonStyle.Primary" />
+        <RadzenButton Click=@(args => OnAgricultureClick()) Text="Селскостопански" ButtonStyle="ButtonStyle.Primary" />
+    </div>
+
+    @if (selectedType != null)
+    {
+        <DynamicComponent Type="@selectedType" />
+    }
+</div>
 
 @code {
+    private Type? selectedType;
 
+    void OnCarsClick()
+    {
+        selectedType = Type.GetType("Troshka.Blazor.Components.Offer.CreateCarOfferComponent");
+    }
+
+    void OnBusesClick() {}
+    void OnMotorcyclesClick() {}
+    void OnTrucksClick() {}
+    void OnCaravansClick() {}
+    void OnBoatsClick() {}
+    void OnConstructionClick() {}
+    void OnAgricultureClick() {}
 }

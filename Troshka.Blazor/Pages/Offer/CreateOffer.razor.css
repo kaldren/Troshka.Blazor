@@ -1,0 +1,7 @@
+﻿.OfferButtonOptions {
+    display: flex;
+    flex-direction: row;
+}
+.OfferButtonOptions ::deep button {
+    margin: 0.5rem;
+}
