@@ -25,5 +25,14 @@ namespace Troshka.Blazor.Services.Category
 
             return _mapper.Map<List<ModelModel>>(categories);
         }
+
+        public async Task<List<ModelModel>> GetAll(string brandId)
+        {
+            using var context = _dbFactory.CreateDbContext();
+
+            List<CarModelEntity> categories = await context.CarModels.Where(p => p.CarBrandId == brandId).AsNoTracking().ToListAsync();
+
+            return _mapper.Map<List<ModelModel>>(categories);
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Globalization;
 using Troshka.Blazor.Data;
 using Troshka.Blazor.Infrastructure.Data;
 using Troshka.Blazor.Services.Category;
+using Troshka.Blazor.Services.Coupe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,7 @@ builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICarBrandService, CarBrandService>();
 builder.Services.AddScoped<ICarModelService, CarModelService>();
+builder.Services.AddScoped<ICarCoupeService, CarCoupeService>();
 
 #region Localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Localization");
