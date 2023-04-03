@@ -5,8 +5,10 @@
 @using Troshka.Blazor.Models.Coupe;
 @using Troshka.Blazor.Models.Model;
 @using Troshka.Blazor.Models.Offer;
+@using Troshka.Blazor.Models.Region;
 @using Troshka.Blazor.Services.Category;
 @using Troshka.Blazor.Services.Coupe;
+@using Troshka.Blazor.Services.Region;
 
 @namespace Troshka.Blazor.Components.Offer
 
@@ -14,11 +16,16 @@
 @inject ICarCoupeService CarCoupeService
 @inject ICarBrandService CarBrandService
 @inject ICarModelService CarModelService
+@inject IRegionService RegionService
 
 <div id="CreateCarOfferComponent">
-    <RadzenDropDown @bind-Value=@coupeValue Data=@coupes TextProperty="Name" ValueProperty="Id" />
-    <RadzenDropDown @bind-Value=@brandValue Data=@brands TextProperty="Name" ValueProperty="Id" Change=@OnCarBrandChange />
-    <RadzenDropDown @bind-Value=@modelValue Data=@models TextProperty="Name" ValueProperty="Id" Disabled=string.IsNullOrWhiteSpace(brandValue) />
+    <RadzenDropDown @bind-Value=@coupeValue Data=@coupes TextProperty="Name" Placeholder="Купе" ValueProperty="Id" />
+    <RadzenDropDown @bind-Value=@brandValue Data=@brands TextProperty="Name" Placeholder="Марка" ValueProperty="Id" Change=@OnCarBrandChange />
+    <RadzenDropDown @bind-Value=@modelValue Data=@models TextProperty="Name" Placeholder="Модел" ValueProperty="Id" Disabled=string.IsNullOrWhiteSpace(brandValue) />
+
+    <RadzenDropDown @bind-Value=@regionValue Data=@regions TextProperty="Name" Placeholder="Регион" ValueProperty="Id" Change=@OnRegionChange />
+    <RadzenDropDown @bind-Value=@locationValue Data=@locations TextProperty="Name" Placeholder="Населено място" ValueProperty="Id" Disabled=string.IsNullOrWhiteSpace(regionValue) />
+
     <RadzenTextArea Placeholder="Описание..." />
     <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
     <RadzenButton Text="Публикувай" ButtonStyle="ButtonStyle.Primary" />
@@ -30,9 +37,14 @@
     string coupeValue = "";
     string brandValue = "";
     string modelValue = "";
+    string regionValue = "";
+    string locationValue = "";
+
     List<CoupeModel>? coupes;
     List<BrandModel>? brands;
     List<ModelModel>? models;
+    List<RegionModel>? regions;
+    List<LocationModel>? locations;
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,12 +52,19 @@
 
         coupes = await CarCoupeService.GetAll();
         brands = await CarBrandService.GetAll();
+        regions = await RegionService.GetAllRegions();
     }
 
     async Task OnCarBrandChange()
     {
         if (!string.IsNullOrWhiteSpace(brandValue))
             models = await CarModelService.GetAll(brandValue);
+    }
+
+    async Task OnRegionChange()
+    {
+        if (!string.IsNullOrWhiteSpace(regionValue))
+            locations = await RegionService.GetAllLocations(regionValue);
     }
 
     async Task ShowFiltersDialog()

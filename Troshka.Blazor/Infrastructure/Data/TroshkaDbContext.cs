@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Troshka.Blazor.Domain.Entities;
 using Troshka.Blazor.Domain.Entities.Car;
+using Troshka.Blazor.Domain.Entities.Region;
 
 namespace Troshka.Blazor.Infrastructure.Data
 {
@@ -10,6 +11,8 @@ namespace Troshka.Blazor.Infrastructure.Data
         public DbSet<CarBrandEntity> CarBrands { get; set; }
         public DbSet<CarModelEntity> CarModels { get; set; }
         public DbSet<CarCoupeEntity> CarCoupes { get; set; }
+        public DbSet<RegionEntity> Regions { get; set; }
+        public DbSet<LocationEntity> Locations { get; set; }
 
         public TroshkaDbContext(DbContextOptions<TroshkaDbContext> options) : base(options)
         {
@@ -40,8 +43,14 @@ namespace Troshka.Blazor.Infrastructure.Data
             modelBuilder
                 .AddCarBrands()
                 .AddCarModels()
-                .AddCarCoupe();
+                .AddCarCoupes();
             #endregion Cars
+
+            #region Region & Location
+            modelBuilder
+                .AddRegions()
+                .AddLocations();
+            #endregion Region & Location
         }
 
         private static class SchemaNames
