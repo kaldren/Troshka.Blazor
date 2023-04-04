@@ -2,6 +2,7 @@
 @using Troshka.Blazor.Models;
 @using Troshka.Blazor.Models.Offer;
 @using Troshka.SPA.Localization;
+@using Troshka.Blazor.Models.Offer.Car;
 
 @inject IStringLocalizer<OfferResource> Localization
 
@@ -419,7 +420,7 @@
 
 @code {
     [Parameter]
-    public OfferFiltersModel Filters { get; set; }
+    public CarOfferFiltersModel Filters { get; set; }
 
     void OnClearFiltersBtnClick()
     {

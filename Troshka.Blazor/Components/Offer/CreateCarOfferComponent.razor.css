@@ -19,7 +19,7 @@
     bottom: -15px;
 }
 
-#CreateCarOfferComponent ::deep .rz-textarea, {
+#CreateCarOfferComponent ::deep .rz-textarea {
     min-height: 200px;
 }
 

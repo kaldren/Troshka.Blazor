@@ -1,6 +1,6 @@
-﻿namespace Troshka.Blazor.Models.Offer
+﻿namespace Troshka.Blazor.Models.Offer.Car
 {
-    public class OfferFiltersModel
+    public class CarOfferFiltersModel
     {
         public bool IsRegistered { get; set; }
         public bool HasABS { get; set; }
