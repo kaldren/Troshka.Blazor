@@ -3,12 +3,18 @@
 @using Troshka.Blazor.Models.Brand;
 @using Troshka.Blazor.Models.Category;
 @using Troshka.Blazor.Models.Coupe;
+@using Troshka.Blazor.Models.Currency;
+@using Troshka.Blazor.Models.Engine;
 @using Troshka.Blazor.Models.Model;
 @using Troshka.Blazor.Models.Offer;
 @using Troshka.Blazor.Models.Region;
+@using Troshka.Blazor.Models.Transmission;
 @using Troshka.Blazor.Services.Category;
 @using Troshka.Blazor.Services.Coupe;
+@using Troshka.Blazor.Services.Currency;
+@using Troshka.Blazor.Services.Engine;
 @using Troshka.Blazor.Services.Region;
+@using Troshka.Blazor.Services.Transmission;
 
 @namespace Troshka.Blazor.Components.Offer
 
@@ -17,16 +23,53 @@
 @inject ICarBrandService CarBrandService
 @inject ICarModelService CarModelService
 @inject IRegionService RegionService
+@inject IEngineService EngineService
+@inject ITransmissionService TransmissionService
+@inject ICurrencyService CurrencyService
 
 <div id="CreateCarOfferComponent">
     <RadzenDropDown @bind-Value=@coupeValue Data=@coupes TextProperty="Name" Placeholder="Купе" ValueProperty="Id" />
     <RadzenDropDown @bind-Value=@brandValue Data=@brands TextProperty="Name" Placeholder="Марка" ValueProperty="Id" Change=@OnCarBrandChange />
     <RadzenDropDown @bind-Value=@modelValue Data=@models TextProperty="Name" Placeholder="Модел" ValueProperty="Id" Disabled=string.IsNullOrWhiteSpace(brandValue) />
 
+    <RadzenTextBox Placeholder="Модификация" @bind-Value=modification />
+
+    <RadzenDropDown @bind-Value=@engineValue Data=@engines TextProperty="Name" Placeholder="Двигател" ValueProperty="Id" />
+    <RadzenDropDown @bind-Value=@transmissionValue Data=@transmissions TextProperty="Name" Placeholder="Скоростна кутия" ValueProperty="Id" />
+
+    <RadzenNumeric Placeholder="Мощност (кс)" Min="1" Max="10000" @bind-Value=horsepower />
+
+    <RadzenNumeric Placeholder="Кубатура (куб.см)" Min="1" Max="10000" @bind-Value=cubics />
+
+    <RadzenNumeric Placeholder="Пробег" Min="1" Max="5000000" @bind-Value=mileage />
+
+    <RadzenDropDown @bind-Value=@euroStandard Data=@euroStandards Placeholder="Евростандарт" />
+
+    <RadzenTextBox Placeholder="VIN номер" @bind-Value=vin />
+
+    <RadzenTextArea Placeholder="Описание..." />
+
+    <RadzenDropDown @bind-Value=@monthProduced Data=@months Placeholder="Месец на производство" />
+    <RadzenDropDown @bind-Value=@yearProduced Data=@years Placeholder="Година на производство" />
+
+    <RadzenRadioButtonList @bind-Value=@condition TValue="int">
+        <Items>
+            <RadzenRadioButtonListItem Text="Нов" Value="1" />
+            <RadzenRadioButtonListItem Text="Употребяван" Value="2" />
+            <RadzenRadioButtonListItem Text="За части" Value="3" />
+        </Items>
+    </RadzenRadioButtonList>
+
+    <RadzenNumeric Placeholder="Цена" Min="1" Max="10000" @bind-Value=price />
+
+    <RadzenCheckBox @bind-Value=@priceUponRequest Name="PriceUponRequest" />
+    <RadzenLabel Text="При запитване" Component="PriceUponRequest" />
+
+    <RadzenDropDown @bind-Value=@currencyValue Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" />
+
     <RadzenDropDown @bind-Value=@regionValue Data=@regions TextProperty="Name" Placeholder="Регион" ValueProperty="Id" Change=@OnRegionChange />
     <RadzenDropDown @bind-Value=@locationValue Data=@locations TextProperty="Name" Placeholder="Населено място" ValueProperty="Id" Disabled=string.IsNullOrWhiteSpace(regionValue) />
 
-    <RadzenTextArea Placeholder="Описание..." />
     <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
     <RadzenButton Text="Публикувай" ButtonStyle="ButtonStyle.Primary" />
 </div>
@@ -39,12 +82,33 @@
     string modelValue = "";
     string regionValue = "";
     string locationValue = "";
+    string engineValue = "";
+    string transmissionValue = "";
+    string currencyValue = "";
+    string modification = "";
+    string vin = "";
+    int condition;
+    int? horsepower;
+    int? cubics;
+    int? mileage;
+    int? monthProduced;
+    int? yearProduced;
+    int? euroStandard;
+    decimal? price;
+    bool priceUponRequest;
+    DateTime? dateProduced = DateTime.Now;
 
     List<CoupeModel>? coupes;
     List<BrandModel>? brands;
     List<ModelModel>? models;
     List<RegionModel>? regions;
     List<LocationModel>? locations;
+    List<EngineModel>? engines;
+    List<TransmissionModel>? transmissions;
+    List<CurrencyModel>? currencies;
+    List<int>? months;
+    List<int>? years;
+    List<int>? euroStandards;
 
     protected override async Task OnInitializedAsync()
     {
@@ -53,6 +117,13 @@
         coupes = await CarCoupeService.GetAll();
         brands = await CarBrandService.GetAll();
         regions = await RegionService.GetAllRegions();
+        engines = await EngineService.GetAll();
+        currencies = await CurrencyService.GetAll();
+        transmissions = await TransmissionService.GetAll();
+
+        months = GenerateMonths();
+        years = GenerateYears();
+        euroStandards = GenerateEuroStandards();
     }
 
     async Task OnCarBrandChange()
@@ -72,5 +143,27 @@
         await DialogService.OpenAsync("Филтри", ds =>
             @<OfferFilters Filters=_carModel.Filters />,
             new DialogOptions() { CloseDialogOnOverlayClick = true, CssClass = "Filters" });
+    }
+
+    List<int> GenerateMonths()
+    {
+        return new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+    }
+
+    List<int> GenerateYears()
+    {
+        List<int> years = new();
+
+        for (int i = 1900; i <= DateTime.Now.Year; i++)
+        {
+            years.Add(i);
+        }
+
+        return years;
+    }
+
+    List<int> GenerateEuroStandards()
+    {
+        return new List<int> { 1, 2, 3, 4, 5, 6 };
     }
 }

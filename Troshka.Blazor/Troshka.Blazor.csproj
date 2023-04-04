@@ -36,8 +36,4 @@
 	<PackageReference Include="shortid" Version="4.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Localization\" />
-  </ItemGroup>
-
 </Project>

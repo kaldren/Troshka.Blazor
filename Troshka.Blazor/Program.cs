@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
@@ -8,7 +9,10 @@ using Troshka.Blazor.Data;
 using Troshka.Blazor.Infrastructure.Data;
 using Troshka.Blazor.Services.Category;
 using Troshka.Blazor.Services.Coupe;
+using Troshka.Blazor.Services.Currency;
+using Troshka.Blazor.Services.Engine;
 using Troshka.Blazor.Services.Region;
+using Troshka.Blazor.Services.Transmission;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,18 +45,26 @@ builder.Services.AddScoped<ICarBrandService, CarBrandService>();
 builder.Services.AddScoped<ICarModelService, CarModelService>();
 builder.Services.AddScoped<ICarCoupeService, CarCoupeService>();
 builder.Services.AddScoped<IRegionService, RegionService>();
+builder.Services.AddScoped<IEngineService, EngineService>();
+builder.Services.AddScoped<ITransmissionService, TransmissionService>();
+builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 
 #region Localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Localization");
-var supportedCultures = new List<CultureInfo> { new CultureInfo("en"), new CultureInfo("bg") };
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
+    var supportedCultures = new List<CultureInfo> { new CultureInfo("bg"), new CultureInfo("en") };
+    options.DefaultRequestCulture = new RequestCulture("en");
+    options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 });
+
 #endregion
 
 var app = builder.Build();
+
+app.UseRequestLocalization();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

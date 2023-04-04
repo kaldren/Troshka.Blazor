@@ -5,8 +5,11 @@ using Troshka.Blazor.Domain.Entities.Region;
 using Troshka.Blazor.Models.Brand;
 using Troshka.Blazor.Models.Category;
 using Troshka.Blazor.Models.Coupe;
+using Troshka.Blazor.Models.Currency;
+using Troshka.Blazor.Models.Engine;
 using Troshka.Blazor.Models.Model;
 using Troshka.Blazor.Models.Region;
+using Troshka.Blazor.Models.Transmission;
 
 namespace Troshka.Blazor
 {
@@ -21,6 +24,10 @@ namespace Troshka.Blazor
 
             CreateMap<RegionEntity, RegionModel>();
             CreateMap<LocationEntity, LocationModel>();
+
+            CreateMap<EngineEntity, EngineModel>();
+            CreateMap<TransmissionEntity, TransmissionModel>();
+            CreateMap<CurrencyEntity, CurrencyModel>();
         }
     }
 }

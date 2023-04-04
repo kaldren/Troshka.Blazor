@@ -13,6 +13,9 @@ namespace Troshka.Blazor.Infrastructure.Data
         public DbSet<CarCoupeEntity> CarCoupes { get; set; }
         public DbSet<RegionEntity> Regions { get; set; }
         public DbSet<LocationEntity> Locations { get; set; }
+        public DbSet<EngineEntity> Engines { get; set; }
+        public DbSet<TransmissionEntity> Transmissions { get; set; }
+        public DbSet<CurrencyEntity> Currencies { get; set; }
 
         public TroshkaDbContext(DbContextOptions<TroshkaDbContext> options) : base(options)
         {
@@ -51,6 +54,17 @@ namespace Troshka.Blazor.Infrastructure.Data
                 .AddRegions()
                 .AddLocations();
             #endregion Region & Location
+
+            #region Engines & Transmissions
+            modelBuilder
+                .AddEngines()
+                .AddTransmissions();
+            #endregion Engines & Transmissions
+
+            #region Currencies
+            modelBuilder
+                .AddCurrencies();
+            #endregion Currencies
         }
 
         private static class SchemaNames

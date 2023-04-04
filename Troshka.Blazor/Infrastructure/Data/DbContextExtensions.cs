@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Troshka.Blazor.Domain.Entities;
 using Troshka.Blazor.Domain.Entities.Car;
 using Troshka.Blazor.Domain.Entities.Region;
 
@@ -7929,6 +7930,59 @@ namespace Troshka.Blazor.Infrastructure.Data
                     new LocationEntity { Id = "F045YLTF07zp7oUAQ7yr", RegionId = "kUDuBIKZ6DZuHytq19Jp", Name = "с. Челник" },
                     new LocationEntity { Id = "GuaIqof3jZzG0Kf4BRXv", RegionId = "kUDuBIKZ6DZuHytq19Jp", Name = "с. Чернозем" },
                     new LocationEntity { Id = "pU2U8XoszwcE4yfDRBoa", RegionId = "kUDuBIKZ6DZuHytq19Jp", Name = "с. Шарково" }
+                );
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder AddEngines(this ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<EngineEntity>()
+                .ToTable("Engines", schema: SchemaNames.Troshka);
+
+            modelBuilder
+                .Entity<EngineEntity>()
+                .HasData(
+                    new EngineEntity { Name = "Бензин" },
+                    new EngineEntity { Name = "Дизел" },
+                    new EngineEntity { Name = "Електрически" },
+                    new EngineEntity { Name = "Хибрид" },
+                    new EngineEntity { Name = "Plug-in хибрид" }
+                );
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder AddTransmissions(this ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<TransmissionEntity>()
+                .ToTable("Transmissions", schema: SchemaNames.Troshka);
+
+            modelBuilder
+                .Entity<TransmissionEntity>()
+                .HasData(
+                    new TransmissionEntity { Name = "Автоматик" },
+                    new TransmissionEntity { Name = "Полу-автоматик" },
+                    new TransmissionEntity { Name = "Ръчна" }
+                );
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder AddCurrencies(this ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<CurrencyEntity>()
+                .ToTable("Currencies", schema: SchemaNames.Troshka);
+
+            modelBuilder
+                .Entity<CurrencyEntity>()
+                .HasData(
+                    new CurrencyEntity { Name = "BGN" },
+                    new CurrencyEntity { Name = "EUR" },
+                    new CurrencyEntity { Name = "USD" }
                 );
 
             return modelBuilder;
