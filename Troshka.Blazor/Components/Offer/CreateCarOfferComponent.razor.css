@@ -6,6 +6,7 @@
 #CreateCarOfferComponent ::deep form > div {
     display: flex;
     margin: 0.75rem 0;
+    align-items: center;
 }
 
 #CreateCarOfferComponent ::deep form > div > div {
@@ -13,11 +14,12 @@
     position: relative;
     margin: 0.5rem 0.5rem 0.5rem 0;
 }
+
 #CreateCarOfferComponent ::deep .rz-message-popup {
     bottom: -15px;
 }
 
-#CreateCarOfferComponent ::deep .rz-textarea {
+#CreateCarOfferComponent ::deep .rz-textarea, {
     min-height: 200px;
 }
 
