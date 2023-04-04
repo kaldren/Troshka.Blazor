@@ -28,29 +28,41 @@
 @inject ICurrencyService CurrencyService
 
 <div id="CreateCarOfferComponent">
-    <RadzenDropDown @bind-Value=@coupeValue Data=@coupes TextProperty="Name" Placeholder="Купе" ValueProperty="Id" />
-    <RadzenDropDown @bind-Value=@brandValue Data=@brands TextProperty="Name" Placeholder="Марка" ValueProperty="Id" Change=@OnCarBrandChange />
-    <RadzenDropDown @bind-Value=@modelValue Data=@models TextProperty="Name" Placeholder="Модел" ValueProperty="Id" Disabled=string.IsNullOrWhiteSpace(brandValue) />
+    <div>
+        <RadzenDropDown @bind-Value=@coupeValue Data=@coupes TextProperty="Name" Placeholder="Купе" ValueProperty="Id" />
+        <RadzenDropDown @bind-Value=@brandValue Data=@brands TextProperty="Name" Placeholder="Марка" ValueProperty="Id" Change=@OnCarBrandChange />
+        <RadzenDropDown @bind-Value=@modelValue Data=@models TextProperty="Name" Placeholder="Модел" ValueProperty="Id" Disabled=string.IsNullOrWhiteSpace(brandValue) />
+    </div>
 
-    <RadzenTextBox Placeholder="Модификация" @bind-Value=modification />
+    <div>
+        <RadzenTextBox Placeholder="Модификация" @bind-Value=modification />
 
-    <RadzenDropDown @bind-Value=@engineValue Data=@engines TextProperty="Name" Placeholder="Двигател" ValueProperty="Id" />
-    <RadzenDropDown @bind-Value=@transmissionValue Data=@transmissions TextProperty="Name" Placeholder="Скоростна кутия" ValueProperty="Id" />
+        <RadzenDropDown @bind-Value=@engineValue Data=@engines TextProperty="Name" Placeholder="Двигател" ValueProperty="Id" />
+        <RadzenDropDown @bind-Value=@transmissionValue Data=@transmissions TextProperty="Name" Placeholder="Скоростна кутия" ValueProperty="Id" />
+    </div>
 
-    <RadzenNumeric Placeholder="Мощност (кс)" Min="1" Max="10000" @bind-Value=horsepower />
+    <div>
+        <RadzenNumeric Placeholder="Мощност (кс)" Min="1" Max="10000" @bind-Value=horsepower />
+        <RadzenNumeric Placeholder="Кубатура (куб.см)" Min="1" Max="10000" @bind-Value=cubics />
+        <RadzenNumeric Placeholder="Пробег" Min="1" Max="5000000" @bind-Value=mileage />
+    </div>
 
-    <RadzenNumeric Placeholder="Кубатура (куб.см)" Min="1" Max="10000" @bind-Value=cubics />
+    <div>
+        <RadzenDropDown @bind-Value=@euroStandard Data=@euroStandards Placeholder="Евростандарт" />
+        <RadzenTextBox Placeholder="VIN номер" @bind-Value=vin />
+    </div>
 
-    <RadzenNumeric Placeholder="Пробег" Min="1" Max="5000000" @bind-Value=mileage />
+    <div>
+        <RadzenDropDown @bind-Value=@monthProduced Data=@months Placeholder="Месец на производство" />
+        <RadzenDropDown @bind-Value=@yearProduced Data=@years Placeholder="Година на производство" />
+    </div>
 
-    <RadzenDropDown @bind-Value=@euroStandard Data=@euroStandards Placeholder="Евростандарт" />
-
-    <RadzenTextBox Placeholder="VIN номер" @bind-Value=vin />
+    <div>
+        <RadzenDropDown @bind-Value=@regionValue Data=@regions TextProperty="Name" Placeholder="Регион" ValueProperty="Id" Change=@OnRegionChange />
+        <RadzenDropDown @bind-Value=@locationValue Data=@locations TextProperty="Name" Placeholder="Населено място" ValueProperty="Id" Disabled=string.IsNullOrWhiteSpace(regionValue) />
+    </div>
 
     <RadzenTextArea Placeholder="Описание..." />
-
-    <RadzenDropDown @bind-Value=@monthProduced Data=@months Placeholder="Месец на производство" />
-    <RadzenDropDown @bind-Value=@yearProduced Data=@years Placeholder="Година на производство" />
 
     <RadzenRadioButtonList @bind-Value=@condition TValue="int">
         <Items>
@@ -60,15 +72,12 @@
         </Items>
     </RadzenRadioButtonList>
 
-    <RadzenNumeric Placeholder="Цена" Min="1" Max="10000" @bind-Value=price />
-
-    <RadzenCheckBox @bind-Value=@priceUponRequest Name="PriceUponRequest" />
-    <RadzenLabel Text="При запитване" Component="PriceUponRequest" />
-
-    <RadzenDropDown @bind-Value=@currencyValue Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" />
-
-    <RadzenDropDown @bind-Value=@regionValue Data=@regions TextProperty="Name" Placeholder="Регион" ValueProperty="Id" Change=@OnRegionChange />
-    <RadzenDropDown @bind-Value=@locationValue Data=@locations TextProperty="Name" Placeholder="Населено място" ValueProperty="Id" Disabled=string.IsNullOrWhiteSpace(regionValue) />
+    <div>
+        <RadzenNumeric Placeholder="Цена" Min="1" Max="10000" @bind-Value=price />
+        <RadzenDropDown @bind-Value=@currencyValue Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" />
+        <RadzenLabel Text="При запитване" Component="PriceUponRequest" />
+        <RadzenCheckBox @bind-Value=@priceUponRequest Name="PriceUponRequest" />
+    </div>
 
     <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
     <RadzenButton Text="Публикувай" ButtonStyle="ButtonStyle.Primary" />
@@ -84,7 +93,7 @@
     string locationValue = "";
     string engineValue = "";
     string transmissionValue = "";
-    string currencyValue = "";
+    string currencyValue = "BGN";
     string modification = "";
     string vin = "";
     int condition;

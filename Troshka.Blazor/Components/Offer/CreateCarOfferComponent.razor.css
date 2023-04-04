@@ -7,6 +7,10 @@
     margin: 0.5rem 0;
 }
 
+#CreateCarOfferComponent ::deep .rz-textarea {
+    min-height: 200px;
+}
+
 #CreateCarOfferComponent ::deep button {
-    margin: 1rem 0 0;
+    margin: 1rem 0;
 }
