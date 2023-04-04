@@ -1,10 +1,20 @@
-﻿#CreateCarOfferComponent {
+﻿#CreateCarOfferComponent ::deep form {
     display: flex;
     flex-direction: column;
 }
 
-#CreateCarOfferComponent ::deep .rz-dropdown, .rz-dropdown {
-    margin: 0.5rem 0;
+#CreateCarOfferComponent ::deep form > div {
+    display: flex;
+    margin: 0.75rem 0;
+}
+
+#CreateCarOfferComponent ::deep form > div > div {
+    display: flex;
+    position: relative;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+#CreateCarOfferComponent ::deep .rz-message-popup {
+    bottom: -15px;
 }
 
 #CreateCarOfferComponent ::deep .rz-textarea {
