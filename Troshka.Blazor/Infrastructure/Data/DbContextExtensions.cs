@@ -8025,5 +8025,14 @@ namespace Troshka.Blazor.Infrastructure.Data
 
             return modelBuilder;
         }
+
+        public static ModelBuilder AddCarOffers(this ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<CarOfferEntity>()
+                .ToTable("CarOffers", schema: SchemaNames.Cars);
+
+            return modelBuilder;
+        }
     }
 }

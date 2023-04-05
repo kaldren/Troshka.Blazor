@@ -10,6 +10,7 @@ using Troshka.Blazor.Models.Engine;
 using Troshka.Blazor.Models.EuroStandard;
 using Troshka.Blazor.Models.Material;
 using Troshka.Blazor.Models.Model;
+using Troshka.Blazor.Models.Offer.Car;
 using Troshka.Blazor.Models.Region;
 using Troshka.Blazor.Models.Transmission;
 
@@ -32,6 +33,9 @@ namespace Troshka.Blazor
             CreateMap<CurrencyEntity, CurrencyModel>();
             CreateMap<EuroStandardEntity, EuroStandardModel>();
             CreateMap<MaterialEntity, MaterialModel>();
+
+            CreateMap<CreateCarOfferRequestModel, CarOfferEntity>();
+            CreateMap<CarOfferEntity, CarOfferModel>();
         }
     }
 }
