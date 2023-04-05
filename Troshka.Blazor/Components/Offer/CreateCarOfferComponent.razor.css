@@ -36,5 +36,6 @@
     max-width: 100%;
     width: 150px;
 }
-
-#CreateCarOfferComponent ::deep .rz-spinner-button {display: none}
+#CreateCarOfferComponent ::deep .rz-spinner-button {
+    display: none
+}
