@@ -154,7 +154,7 @@
 
         <div>
             <RadzenNumeric Placeholder="Цена" Min="1" Max="10000" @bind-Value=@_offerModel.Price />
-            <RadzenDropDown @bind-Value=@_offerModel.Currency Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" />
+            <RadzenDropDown @bind-Value=@_offerModel.CurrencyId Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" />
             <RadzenCheckBox @bind-Value=@_offerModel.PriceUponRequest Name="PriceUponRequest" />
             <RadzenLabel Text="При запитване" Component="PriceUponRequest" />
         </div>
