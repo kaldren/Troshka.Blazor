@@ -7987,5 +7987,43 @@ namespace Troshka.Blazor.Infrastructure.Data
 
             return modelBuilder;
         }
+
+        public static ModelBuilder AddEuroStandards(this ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<EuroStandardEntity>()
+                .ToTable("EuroStandards", schema: SchemaNames.Troshka);
+
+            modelBuilder
+                .Entity<EuroStandardEntity>()
+                .HasData(
+                    new EuroStandardEntity { Name = "Euro 1" },
+                    new EuroStandardEntity { Name = "Euro 2" },
+                    new EuroStandardEntity { Name = "Euro 3" },
+                    new EuroStandardEntity { Name = "Euro 4" },
+                    new EuroStandardEntity { Name = "Euro 5" },
+                    new EuroStandardEntity { Name = "Euro 6" },
+                    new EuroStandardEntity { Name = "Euro 7" }
+                );
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder AddMaterials(this ModelBuilder modelBuilder)
+        {
+            modelBuilder
+            .Entity<MaterialEntity>()
+            .ToTable("Interior", schema: SchemaNames.Troshka);
+
+            modelBuilder
+                .Entity<MaterialEntity>()
+                .HasData(
+                    new MaterialEntity { Name = "Велур" },
+                    new MaterialEntity { Name = "Кожа" },
+                    new MaterialEntity { Name = "Текстил" }
+                );
+
+            return modelBuilder;
+        }
     }
 }

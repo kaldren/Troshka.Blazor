@@ -16,6 +16,8 @@ namespace Troshka.Blazor.Infrastructure.Data
         public DbSet<EngineEntity> Engines { get; set; }
         public DbSet<TransmissionEntity> Transmissions { get; set; }
         public DbSet<CurrencyEntity> Currencies { get; set; }
+        public DbSet<EuroStandardEntity> EuroStandards { get; set; }
+        public DbSet<MaterialEntity> Materials { get; set; }
 
         public TroshkaDbContext(DbContextOptions<TroshkaDbContext> options) : base(options)
         {
@@ -65,6 +67,16 @@ namespace Troshka.Blazor.Infrastructure.Data
             modelBuilder
                 .AddCurrencies();
             #endregion Currencies
+
+            #region Euro Standards
+            modelBuilder
+                .AddEuroStandards();
+            #endregion Euro Standards
+
+            #region Materials
+            modelBuilder
+                .AddMaterials();
+            #endregion Materials
         }
 
         private static class SchemaNames

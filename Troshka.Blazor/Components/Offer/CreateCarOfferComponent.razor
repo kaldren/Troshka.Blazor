@@ -5,6 +5,8 @@
 @using Troshka.Blazor.Models.Coupe;
 @using Troshka.Blazor.Models.Currency;
 @using Troshka.Blazor.Models.Engine;
+@using Troshka.Blazor.Models.EuroStandard;
+@using Troshka.Blazor.Models.Material;
 @using Troshka.Blazor.Models.Model;
 @using Troshka.Blazor.Models.Offer;
 @using Troshka.Blazor.Models.Region;
@@ -13,6 +15,8 @@
 @using Troshka.Blazor.Services.Coupe;
 @using Troshka.Blazor.Services.Currency;
 @using Troshka.Blazor.Services.Engine;
+@using Troshka.Blazor.Services.EuroStandard;
+@using Troshka.Blazor.Services.Material;
 @using Troshka.Blazor.Services.Region;
 @using Troshka.Blazor.Services.Transmission;
 @using Troshka.Blazor.Models.Offer.Car;
@@ -42,6 +46,8 @@
 @inject IEngineService EngineService
 @inject ITransmissionService TransmissionService
 @inject ICurrencyService CurrencyService
+@inject IEuroStandardService EuroStandardService
+@inject IMaterialService MaterialService
 
 <div id="CreateCarOfferComponent">
     <RadzenTemplateForm TItem="CreateCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
@@ -94,8 +100,13 @@
 
         <div>
             <div>
-                <RadzenDropDown @bind-Value=@_offerModel.EuroStandardId Data=@euroStandards Placeholder="Евростандарт" Name="Eurostandard" />
+                <RadzenDropDown @bind-Value=@_offerModel.EuroStandardId Data=@euroStandards Placeholder="Евростандарт" TextProperty="Name" ValueProperty="Id" Name="Eurostandard" />
                 <RadzenRequiredValidator Component="Eurostandard" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+            </div>
+
+            <div>
+                <RadzenDropDown @bind-Value=@_offerModel.MaterialId Data=@interiorMaterials TextProperty="Name" Placeholder="Салон" ValueProperty="Id" Name="MaterialModel" />
+                <RadzenRequiredValidator Component="MaterialModel" Text="Задължително поле" Popup=@popup Style="position: absolute" />
             </div>
 
             <div>
@@ -121,7 +132,7 @@
                 <RadzenRequiredValidator Component="Region" Text="Задължително поле" Popup=@popup Style="position: absolute" />
             </div>
             <div>
-                <RadzenDropDown @bind-Value=@_offerModel.LocationId Data=@locations TextProperty="Name" Placeholder="Населено място" ValueProperty="Id" Name="Location" Disabled=string.IsNullOrWhiteSpace(regionValue) />
+                <RadzenDropDown @bind-Value=@_offerModel.LocationId Data=@locations TextProperty="Name" Placeholder="Населено място" ValueProperty="Id" Name="Location" Disabled=string.IsNullOrWhiteSpace(_offerModel.RegionId) />
                 <RadzenRequiredValidator Component="Location" Text="Задължително поле" Popup=@popup Style="position: absolute" />
             </div>
         </div>
@@ -156,25 +167,6 @@
 @code {
     private CreateCarOfferRequestModel _offerModel = new();
 
-    string coupeValue = "";
-    string brandValue = "";
-    string modelValue = "";
-    string regionValue = "";
-    string locationValue = "";
-    string engineValue = "";
-    string transmissionValue = "";
-    string currencyValue = "BGN";
-    string modification = "";
-    string vin = "";
-    int condition;
-    int? horsepower;
-    int? cubics;
-    int? mileage;
-    int? monthProduced;
-    int? yearProduced;
-    int? euroStandard;
-    decimal? price;
-    bool priceUponRequest;
     bool popup = true;
     DateTime? dateProduced = DateTime.Now;
 
@@ -186,9 +178,10 @@
     List<EngineModel>? engines;
     List<TransmissionModel>? transmissions;
     List<CurrencyModel>? currencies;
+    List<EuroStandardModel>? euroStandards;
+    List<MaterialModel>? interiorMaterials;
     List<int>? months;
     List<int>? years;
-    List<int>? euroStandards;
 
     protected override async Task OnInitializedAsync()
     {
@@ -200,10 +193,11 @@
         engines = await EngineService.GetAll();
         currencies = await CurrencyService.GetAll();
         transmissions = await TransmissionService.GetAll();
+        euroStandards = await EuroStandardService.GetAll();
+        interiorMaterials = await MaterialService.GetAll();
 
         months = GenerateMonths();
         years = GenerateYears();
-        euroStandards = GenerateEuroStandards();
     }
 
     async Task OnCarBrandChange()
@@ -214,8 +208,8 @@
 
     async Task OnRegionChange()
     {
-        if (!string.IsNullOrWhiteSpace(regionValue))
-            locations = await RegionService.GetAllLocations(regionValue);
+        if (!string.IsNullOrWhiteSpace(_offerModel.RegionId))
+            locations = await RegionService.GetAllLocations(_offerModel.RegionId);
     }
 
     async Task ShowFiltersDialog()
@@ -234,7 +228,7 @@
     {
         List<int> years = new();
 
-        for (int i = 1900; i <= DateTime.Now.Year; i++)
+        for (int i = DateTime.Now.Year; i >= 1900; i--)
         {
             years.Add(i);
         }

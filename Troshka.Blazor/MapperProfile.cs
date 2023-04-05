@@ -7,6 +7,8 @@ using Troshka.Blazor.Models.Category;
 using Troshka.Blazor.Models.Coupe;
 using Troshka.Blazor.Models.Currency;
 using Troshka.Blazor.Models.Engine;
+using Troshka.Blazor.Models.EuroStandard;
+using Troshka.Blazor.Models.Material;
 using Troshka.Blazor.Models.Model;
 using Troshka.Blazor.Models.Region;
 using Troshka.Blazor.Models.Transmission;
@@ -28,6 +30,8 @@ namespace Troshka.Blazor
             CreateMap<EngineEntity, EngineModel>();
             CreateMap<TransmissionEntity, TransmissionModel>();
             CreateMap<CurrencyEntity, CurrencyModel>();
+            CreateMap<EuroStandardEntity, EuroStandardModel>();
+            CreateMap<MaterialEntity, MaterialModel>();
         }
     }
 }
