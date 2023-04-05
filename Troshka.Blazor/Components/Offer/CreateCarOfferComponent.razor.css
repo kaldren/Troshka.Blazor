@@ -9,6 +9,11 @@
     align-items: center;
 }
 
+#CreateCarOfferComponent ::deep .vin-number {
+    max-width: 100%;
+    width: 300px;
+}
+
 #CreateCarOfferComponent ::deep form > div > div {
     display: flex;
     position: relative;

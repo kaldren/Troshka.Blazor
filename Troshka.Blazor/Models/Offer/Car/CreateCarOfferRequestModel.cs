@@ -19,7 +19,7 @@
         public int? Mileage { get; set; }
         public int? MonthProduced { get; set; }
         public int? YearProduced { get; set; }
-        public int? Condition { get; set; }
+        public int Condition { get; set; }
         public decimal? Cubics { get; set; }
         public decimal? Price { get; set; }
         public bool PriceUponRequest { get; set; }

@@ -93,7 +93,7 @@
             </div>
             
             <div>
-                <RadzenNumeric Placeholder="Пробег" Min="1" Max="5000000" @bind-Value=@_offerModel.Mileage Name="Mileage" />
+                <RadzenNumeric Placeholder="Пробег (км)" Min="1" Max="5000000" @bind-Value=@_offerModel.Mileage Name="Mileage" />
                 <RadzenRequiredValidator Component="Mileage" Text="Задължително поле" Popup=@popup Style="position: absolute" />
             </div>
         </div>
@@ -107,10 +107,6 @@
             <div>
                 <RadzenDropDown @bind-Value=@_offerModel.MaterialId Data=@interiorMaterials TextProperty="Name" Placeholder="Салон" ValueProperty="Id" Name="MaterialModel" />
                 <RadzenRequiredValidator Component="MaterialModel" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-            </div>
-
-            <div>
-                <RadzenTextBox Placeholder="VIN номер" @bind-Value=@_offerModel.VIN />
             </div>
         </div>
 
@@ -137,11 +133,13 @@
             </div>
         </div>
 
-        <RadzenTextArea Placeholder="Описание..." />
+        <div>
+            <RadzenTextBox Placeholder="VIN номер" @bind-Value=@_offerModel.VIN class="vin-number" />
+        </div>
 
         <div>
             <div>
-                <RadzenRadioButtonList @bind-Value=@_offerModel.Condition TValue="int?" Name="Condition">
+                <RadzenRadioButtonList @bind-Value=@_offerModel.Condition TValue="int" Name="Condition">
                     <Items>
                         <RadzenRadioButtonListItem Text="Нов" Value="1" />
                         <RadzenRadioButtonListItem Text="Употребяван" Value="2" />
@@ -151,6 +149,8 @@
                 <RadzenRequiredValidator Component="Condition" Text="Задължително поле" Popup=@popup Style="position: absolute" />
             </div>
         </div>
+
+            <RadzenTextArea Placeholder="Описание..." />
 
         <div>
             <RadzenNumeric Placeholder="Цена" Min="1" Max="10000" @bind-Value=@_offerModel.Price />
