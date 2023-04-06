@@ -17,6 +17,7 @@
 @using Troshka.Blazor.Services.Engine;
 @using Troshka.Blazor.Services.EuroStandard;
 @using Troshka.Blazor.Services.Material;
+@using Troshka.Blazor.Services.Offer;
 @using Troshka.Blazor.Services.Region;
 @using Troshka.Blazor.Services.Transmission;
 @using Troshka.Blazor.Models.Offer.Car;
@@ -48,6 +49,7 @@
 @inject ICurrencyService CurrencyService
 @inject IEuroStandardService EuroStandardService
 @inject IMaterialService MaterialService
+@inject IOfferService OfferService
 
 <div id="CreateCarOfferComponent">
     <RadzenTemplateForm TItem="CreateCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
@@ -150,7 +152,7 @@
             </div>
         </div>
 
-            <RadzenTextArea Placeholder="Описание..." />
+            <RadzenTextArea Placeholder="Описание..." @bind-Value=@_offerModel.Description />
 
         <div>
             <RadzenNumeric Placeholder="Цена" Min="1" Max="10000" @bind-Value=@_offerModel.Price />
@@ -241,8 +243,8 @@
         return new List<int> { 1, 2, 3, 4, 5, 6 };
     }
 
-    void OnFormSubmit(CreateCarOfferRequestModel model)
+    async Task OnFormSubmit(CreateCarOfferRequestModel model)
     {
-        
+        await OfferService.CreateCarOfferAsync(model);
     }
 }

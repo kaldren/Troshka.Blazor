@@ -18,32 +18,41 @@ namespace Troshka.Blazor.Services.Offer
             _mapper = mapper;
         }
 
-        public async Task<ResultModel<CarOfferModel>> CreateCarOffer(CreateCarOfferRequestModel model)
+        public async Task<ResultModel<CarOfferModel>> CreateCarOfferAsync(CreateCarOfferRequestModel model)
         {
-            using var context = _dbFactory.CreateDbContext();
-
-            var entity = _mapper.Map<CarOfferEntity>(model);
-            await context.CarOffers.AddAsync(entity);
-            var result = await context.SaveChangesAsync();
-
-            if (result > 0)
+            try
             {
-                var response = _mapper.Map<CarOfferModel>(entity);
-                return new ResultModel<CarOfferModel>
+                using var context = _dbFactory.CreateDbContext();
+
+                var entity = _mapper.Map<CarOfferEntity>(model);
+                await context.CarOffers.AddAsync(entity);
+                var result = await context.SaveChangesAsync();
+
+                if (result > 0)
                 {
-                    IsSuccess = true,
-                    Message = "Успешна операция.",
-                    Value = response
-                };
+                    var response = _mapper.Map<CarOfferModel>(entity);
+                    return new ResultModel<CarOfferModel>
+                    {
+                        IsSuccess = true,
+                        Message = "Успешна операция.",
+                        Value = response
+                    };
+                }
+                else
+                {
+                    return new ResultModel<CarOfferModel>
+                    {
+                        IsSuccess = false,
+                        Message = "Неуспешна операция."
+                    };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ResultModel<CarOfferModel>
-                {
-                    IsSuccess = false,
-                    Message = "Неуспешна операция."
-                };
+
+                throw;
             }
+
         }
     }
 }

@@ -13,6 +13,7 @@ using Troshka.Blazor.Services.Currency;
 using Troshka.Blazor.Services.Engine;
 using Troshka.Blazor.Services.EuroStandard;
 using Troshka.Blazor.Services.Material;
+using Troshka.Blazor.Services.Offer;
 using Troshka.Blazor.Services.Region;
 using Troshka.Blazor.Services.Transmission;
 
@@ -52,6 +53,7 @@ builder.Services.AddScoped<ITransmissionService, TransmissionService>();
 builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 builder.Services.AddScoped<IEuroStandardService, EuroStandardService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
+builder.Services.AddScoped<IOfferService, OfferService>();
 
 #region Localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Localization");

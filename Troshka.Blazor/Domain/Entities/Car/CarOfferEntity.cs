@@ -2,7 +2,7 @@
 
 namespace Troshka.Blazor.Domain.Entities.Car
 {
-    public class CarOfferEntity
+    public class CarOfferEntity : BaseEntity
     {
         public string CoupeId { get; set; }
         public CarCoupeEntity Coupe { get; set; }
@@ -22,17 +22,17 @@ namespace Troshka.Blazor.Domain.Entities.Car
         public LocationEntity Location { get; set; }
         public string EuroStandardId { get; set; }
         public EuroStandardEntity EuroStandard { get; set; }
-        public string CurrencyId { get; set; }
+        public string? CurrencyId { get; set; }
         public CurrencyEntity Currency { get; set; }
-        public string Description { get; set; }
-        public string VIN { get; set; }
+        public string? Description { get; set; }
+        public string? VIN { get; set; }
         public int Horsepower { get; set; }
         public int Mileage { get; set; }
         public int MonthProduced { get; set; }
         public int YearProduced { get; set; }
         public int Condition { get; set; }
         public int Cubics { get; set; }
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         public bool PriceUponRequest { get; set; }
         public bool IsRegistered { get; set; }
         public bool HasABS { get; set; }
