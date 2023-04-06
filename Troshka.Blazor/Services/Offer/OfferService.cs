@@ -54,5 +54,11 @@ namespace Troshka.Blazor.Services.Offer
             }
 
         }
+
+        private bool ValidateCreateCarOfferAsync(CreateCarOfferRequestModel model)
+        {
+
+            return false;
+        }
     }
 }
