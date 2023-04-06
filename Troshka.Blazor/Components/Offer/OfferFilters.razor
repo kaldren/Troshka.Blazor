@@ -1,10 +1,9 @@
 ﻿@using Microsoft.Extensions.Localization;
 @using Troshka.Blazor.Models;
 @using Troshka.Blazor.Models.Offer;
-@using Troshka.SPA.Localization;
 @using Troshka.Blazor.Models.Offer.Car;
 
-@inject IStringLocalizer<OfferResource> Localization
+@inject IStringLocalizer<App> Localization
 
 <div id="OfferFiltersComponent">
     <RadzenButton Text="Clear" Click=@OnClearFiltersBtnClick />

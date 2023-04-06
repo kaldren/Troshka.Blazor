@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 using Radzen;
-using System.Globalization;
 using Troshka.Blazor.Data;
 using Troshka.Blazor.Infrastructure.Data;
 using Troshka.Blazor.Services.Category;
@@ -56,21 +54,20 @@ builder.Services.AddScoped<IMaterialService, MaterialService>();
 builder.Services.AddScoped<IOfferService, OfferService>();
 
 #region Localization
-builder.Services.AddLocalization(options => options.ResourcesPath = "Localization");
-builder.Services.Configure<RequestLocalizationOptions>(options =>
-{
-    var supportedCultures = new List<CultureInfo> { new CultureInfo("bg"), new CultureInfo("en") };
-    options.DefaultRequestCulture = new RequestCulture("en");
-    options.SupportedCultures = supportedCultures;
-    options.SupportedUICultures = supportedCultures;
-});
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 #endregion
 
 var app = builder.Build();
 
-app.UseRequestLocalization();
+var cultures = builder.Configuration.GetSection("Cultures")
+    .GetChildren().ToDictionary(x => x.Key, x => x.Value);
 
+var supportedCultures = cultures.Keys.ToArray();
+
+var localizationOptions = new RequestLocalizationOptions()
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -83,6 +80,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseRequestLocalization(localizationOptions);
 
 app.UseRouting();
 
