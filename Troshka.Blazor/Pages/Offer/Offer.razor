@@ -1,0 +1,12 @@
+﻿@page "/offer/{id}"
+@using Radzen.Blazor
+@using Radzen;
+@inject NavigationManager Navigation
+
+<p>Обява @Id</p>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+}

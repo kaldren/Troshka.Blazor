@@ -1,4 +1,6 @@
-﻿@using Radzen;
+﻿@namespace Troshka.Blazor.Components.Offer
+
+@using Radzen;
 @using Troshka.Blazor.Models;
 @using Troshka.Blazor.Models.Brand;
 @using Troshka.Blazor.Models.Category;
@@ -22,7 +24,6 @@
 @using Troshka.Blazor.Services.Transmission;
 @using Troshka.Blazor.Models.Offer.Car;
 
-@namespace Troshka.Blazor.Components.Offer
 @using Troshka.Blazor.Models.Brand;
 @using Troshka.Blazor.Models.Coupe;
 @using Troshka.Blazor.Models.Currency;
@@ -250,6 +251,11 @@
 
     async Task OnFormSubmit(CreateCarOfferRequestModel model)
     {
-        await OfferService.CreateCarOfferAsync(model);
+        var result = await OfferService.CreateCarOfferAsync(model);
+
+        if (result.IsSuccess)
+        {
+            
+        }
     }
 }
