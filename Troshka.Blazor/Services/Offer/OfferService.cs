@@ -60,7 +60,11 @@ namespace Troshka.Blazor.Services.Offer
             {
                 using var context = _dbFactory.CreateDbContext();
 
-                var entity = await context.CarOffers.FindAsync(id);
+                string customerName = id;
+                var query = context.CarOffers
+                    .FromSqlRaw("SELECT * FROM [Cars].[CarOffers] WHERE Id = {0}", id);
+                var entity = await query.FirstOrDefaultAsync();
+
 
                 if (entity != null)
                 {

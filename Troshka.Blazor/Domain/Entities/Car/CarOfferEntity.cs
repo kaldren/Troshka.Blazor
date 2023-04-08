@@ -5,25 +5,25 @@ namespace Troshka.Blazor.Domain.Entities.Car
     public class CarOfferEntity : BaseEntity
     {
         public string CoupeId { get; set; }
-        public CarCoupeEntity Coupe { get; set; }
+        public virtual CarCoupeEntity Coupe { get; set; }
         public string BrandId { get; set; }
-        public CarBrandEntity Brand { get; set; }
+        public virtual CarBrandEntity Brand { get; set; }
         public string ModelId { get; set; }
-        public CarModelEntity Model { get; set; }
+        public virtual CarModelEntity Model { get; set; }
         public string EngineId { get; set; }
-        public EngineEntity Engine { get; set; }
+        public virtual EngineEntity Engine { get; set; }
         public string TransmissionId { get; set; }
-        public TransmissionEntity Transmission { get; set; }
+        public virtual TransmissionEntity Transmission { get; set; }
         public string MaterialId { get; set; }
-        public MaterialEntity Material { get; set; }
+        public virtual MaterialEntity Material { get; set; }
         public string RegionId { get; set; }
-        public RegionEntity Region { get; set; }
+        public virtual RegionEntity Region { get; set; }
         public string LocationId { get; set; }
-        public LocationEntity Location { get; set; }
+        public virtual LocationEntity Location { get; set; }
         public string EuroStandardId { get; set; }
-        public EuroStandardEntity EuroStandard { get; set; }
+        public virtual EuroStandardEntity EuroStandard { get; set; }
         public string? CurrencyId { get; set; }
-        public CurrencyEntity Currency { get; set; }
+        public virtual CurrencyEntity Currency { get; set; }
         public string? Description { get; set; }
         public string? VIN { get; set; }
         public int Horsepower { get; set; }

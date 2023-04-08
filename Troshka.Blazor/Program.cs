@@ -35,7 +35,9 @@ builder.Services.AddServerSideBlazor()
 builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddDbContextFactory<TroshkaDbContext>(opt =>
-        opt.UseSqlServer(builder.Configuration.GetValue<string>("Troshka:ConnectionString")));
+        opt
+        .UseLazyLoadingProxies()
+        .UseSqlServer(builder.Configuration.GetValue<string>("Troshka:ConnectionString")));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

@@ -35,7 +35,17 @@ namespace Troshka.Blazor
             CreateMap<MaterialEntity, MaterialModel>();
 
             CreateMap<CreateCarOfferRequestModel, CarOfferEntity>();
-            CreateMap<CarOfferEntity, CarOfferModel>();
+            CreateMap<CarOfferEntity, CarOfferModel>()
+                .ForPath(dest => dest.Coupe, opt => opt.MapFrom(src => src.Coupe.Name))
+                .ForPath(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand.Name))
+                .ForPath(dest => dest.Model, opt => opt.MapFrom(src => src.Model.Name))
+                .ForPath(dest => dest.Engine, opt => opt.MapFrom(src => src.Engine.Name))
+                .ForPath(dest => dest.Transmission, opt => opt.MapFrom(src => src.Transmission.Name))
+                .ForPath(dest => dest.Material, opt => opt.MapFrom(src => src.Material.Name))
+                .ForPath(dest => dest.Region, opt => opt.MapFrom(src => src.Region.Name))
+                .ForPath(dest => dest.Location, opt => opt.MapFrom(src => src.Location.Name))
+                .ForPath(dest => dest.EuroStandard, opt => opt.MapFrom(src => src.EuroStandard.Name))
+                .ForPath(dest => dest.Currency, opt => opt.MapFrom(src => src.Currency.Name));
         }
     }
 }
