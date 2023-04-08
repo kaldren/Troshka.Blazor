@@ -8109,5 +8109,18 @@ namespace Troshka.Blazor.Infrastructure.Data
 
             return modelBuilder;
         }
+
+        public static ModelBuilder AddOfferImages(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OfferImageEntity>()
+                .ToTable("OfferImages", schema: SchemaNames.Troshka);
+
+            modelBuilder.Entity<CarOfferEntity>()
+                .HasMany(c => c.Images)
+                .WithOne(o => o.CarOffer)
+                .HasForeignKey(o => o.OfferId);
+
+            return modelBuilder;
+        }
     }
 }

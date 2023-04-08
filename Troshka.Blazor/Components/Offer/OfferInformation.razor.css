@@ -1,0 +1,14 @@
+﻿.Components__OfferInformation {
+    background: #f4f4f4;
+    padding: 0.5rem;
+}
+
+.Components__OfferInformation .accordion-body {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.Components__OfferInformation .accordion-body span {
+    margin: 0.2rem 1rem;
+}

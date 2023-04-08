@@ -19,6 +19,7 @@ namespace Troshka.Blazor.Infrastructure.Data
         public DbSet<EuroStandardEntity> EuroStandards { get; set; }
         public DbSet<MaterialEntity> Materials { get; set; }
         public DbSet<CarOfferEntity> CarOffers { get; set; }
+        public DbSet<OfferImageEntity> OfferImages { get; set; }
 
         public TroshkaDbContext(DbContextOptions<TroshkaDbContext> options) : base(options)
         {
@@ -83,6 +84,11 @@ namespace Troshka.Blazor.Infrastructure.Data
             modelBuilder
                 .AddCarOffers();
             #endregion Offers
+
+            #region Images
+            modelBuilder
+                .AddOfferImages();
+            #endregion Images
         }
 
         private static class SchemaNames

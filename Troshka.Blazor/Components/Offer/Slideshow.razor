@@ -1,0 +1,39 @@
+﻿@using AutoMapper;
+
+@inject IMapper Mapper
+@inject IStringLocalizer<App> LocalizerShared
+
+<div class="Components__Slideshow">
+
+@*    @if (_isLoading)
+    {
+        <p>@LocalizerShared["Loading"]</p>
+    }
+
+    @if (_carImageModel != default)
+    {
+        <Carousel ImageUrls="_carImageModel.Select(p => p.ImageUrl).ToList()" />
+    }*@
+</div>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    //private List<CarOfferImagesModel> _carImageModel;
+    private bool _isLoading;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //try
+        //{
+        //    _isLoading = true;
+        //    var api = await TroshkaApiClient.ApiCarsOffersImagesAsync(Id);
+        //    _carImageModel = Mapper.Map<List<CarOfferImagesModel>>(api.Result);
+        //}
+        //finally
+        //{
+        //    _isLoading = false;
+        //}
+    }
+}

@@ -1,12 +1,23 @@
 ﻿@page "/offer/{id}"
 @using Radzen.Blazor
 @using Radzen;
+@using Troshka.Blazor.Components.Offer
 @using Troshka.Blazor.Models.Offer.Car;
 @using Troshka.Blazor.Services.Offer;
 
 @inject NavigationManager Navigation
 @inject IOfferService OfferService
-<p>Обява @Id</p>
+
+<div class="Pages__Offer">
+    <main>
+        <Slideshow Id="@Id" />
+        <OfferInformation Id="@Id" />
+        <Comments Id="@Id" />
+    </main>
+    <aside>
+        @*<contact id="@id" />*@
+    </aside>
+</div>
 
 @code {
 
@@ -20,7 +31,8 @@
     {
         try
         {
-            var offer = await OfferService.GetCarOfferAsync(Id);
+            var response = await OfferService.GetCarOfferAsync(Id);
+            _carOfferModel = response.Value;
 
             _isLoading = true;
             //var client = HttpClientFactory.CreateClient("TroshkaAPINoAuth");

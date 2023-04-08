@@ -1,0 +1,54 @@
+﻿@*@using AutoMapper;
+
+@inject IOfferService OfferService
+@inject IMapper Mapper
+@inject IStringLocalizer<App> LocalizerContact
+@inject IStringLocalizer<App> LocalizerShared
+
+<div class="Components__Contact">
+    @if (_isLoading)
+    {
+        <p>@LocalizerShared["Loading"]</p>
+    }
+
+    @if (_vehicleOwnerModel != default)
+    {
+        <RadzenCard class="m-3">
+            <div class="d-flex flex-row p-3">
+                <div>
+                    <RadzenText TextStyle="TextStyle.Overline" class="d-flex mt-1 mb-0">@LocalizerContact["Contact_Name"]</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1"><b><a href="owners/@_vehicleOwnerModel.Id" target="_blank">@_vehicleOwnerModel.DisplayName</a></b></RadzenText>
+                </div>
+            </div>
+            <RadzenCard class="my-3 rz-background-color-primary-lighter rz-shadow-0 rz-border-radius-0" style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem;">
+                <RadzenText TextStyle="TextStyle.H6" class="rz-color-primary-light"><strong>@LocalizerContact["Contact_Information_Title"]</strong></RadzenText>
+                <div class="row">
+                    <RadzenText TextStyle="TextStyle.Overline" class="rz-color-primary-light d-flex mt-3 mb-0">@LocalizerContact["Contact_Phone"]</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1"><b>@_vehicleOwnerModel.Phone</b></RadzenText>
+                </div>
+            </RadzenCard>
+        </RadzenCard>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private VehicleOwnerModel _vehicleOwnerModel;
+    private bool _isLoading;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _isLoading = true;
+            var api = await TroshkaApiClient.ApiCommonOwnerAsync("123");
+            _vehicleOwnerModel = Mapper.Map<VehicleOwnerModel>(api.Result);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}*@
