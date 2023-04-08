@@ -1,12 +1,39 @@
 ﻿@page "/offer/{id}"
 @using Radzen.Blazor
 @using Radzen;
-@inject NavigationManager Navigation
+@using Troshka.Blazor.Models.Offer.Car;
+@using Troshka.Blazor.Services.Offer;
 
+@inject NavigationManager Navigation
+@inject IOfferService OfferService
 <p>Обява @Id</p>
 
 @code {
 
     [Parameter]
     public string Id { get; set; }
+
+    private CarOfferModel _carOfferModel;
+    private bool _isLoading;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var offer = await OfferService.GetCarOfferAsync(Id);
+
+            _isLoading = true;
+            //var client = HttpClientFactory.CreateClient("TroshkaAPINoAuth");
+            //var response = await client.GetAsync($"/api/cars/offers?$filter=Id eq '{Id}'");
+
+            //response.EnsureSuccessStatusCode();
+
+            //var data = await response.Content.ReadFromJsonAsync<List<CarOfferModel>>();
+            //_carOfferModel = data.FirstOrDefault();
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
 }

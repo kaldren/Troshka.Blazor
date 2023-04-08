@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Components\Offer\CreateOfferComponent.razor.css" />
+    <None Remove="Components\Offer\OfferFilters - Copy.razor.css" />
     <None Remove="Components\Offer\OfferFilters.razor.css" />
     <None Remove="Pages\Offer\CreateOffer.razor.css" />
   </ItemGroup>

@@ -1,0 +1,50 @@
+﻿<div class="Components__Carousel">
+    
+    <div class="front-image">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleLightbox">
+            <img data-bs-target="#lightboxExampleCarousel" data-bs-slide-to="0" src="@ImageUrls[0]" class="img-fluid">
+        </a>
+    </div>
+
+
+    <div class="modal fade" id="exampleLightbox" tabindex="-1" aria-labelledby="exampleLightboxLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="lightboxExampleCarousel" class="carousel slide">
+                        <div class="carousel-inner ratio ratio-16x9 bg-dark">
+                            @for (int i = 0; i < ImageUrls.Count; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="carousel-item text-center active">
+                                        <img src="@ImageUrls[i]" class="img-fluid mh-100">
+                                    </div>
+                                    continue;
+                                }
+
+                                <div class="carousel-item text-center">
+                                    <img src="@ImageUrls[i]" class="img-fluid mh-100">
+                                </div>
+                            }
+
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#lightboxExampleCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#lightboxExampleCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@code {
+    [Parameter]
+    public List<string> ImageUrls { get; set; }
+}

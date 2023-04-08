@@ -52,7 +52,39 @@ namespace Troshka.Blazor.Services.Offer
 
                 throw;
             }
+        }
 
+        public async Task<ResultModel<CarOfferModel>> GetCarOfferAsync(string id)
+        {
+            try
+            {
+                using var context = _dbFactory.CreateDbContext();
+
+                var entity = await context.CarOffers.FindAsync(id);
+
+                if (entity != null)
+                {
+                    var response = _mapper.Map<CarOfferModel>(entity);
+                    return new ResultModel<CarOfferModel>
+                    {
+                        IsSuccess = true,
+                        Message = "Успешна операция.",
+                        Value = response
+                    };
+                }
+                else
+                {
+                    return new ResultModel<CarOfferModel>
+                    {
+                        IsSuccess = false,
+                        Message = "Неуспешна операция."
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         private bool ValidateCreateCarOfferAsync(CreateCarOfferRequestModel model)
