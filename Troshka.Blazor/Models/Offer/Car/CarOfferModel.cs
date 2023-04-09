@@ -14,6 +14,7 @@
         public string Location { get; set; }
         public string EuroStandard { get; set; }
         public string Currency { get; set; }
+        public List<OfferImageModel> Images { get; set; }
         public int Horsepower { get; set; }
         public int Mileage { get; set; }
         public int MonthProduced { get; set; }

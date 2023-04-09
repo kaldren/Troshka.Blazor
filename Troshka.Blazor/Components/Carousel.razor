@@ -1,8 +1,9 @@
-﻿<div class="Components__Carousel">
+﻿@using Troshka.Blazor.Models.Offer;
+<div class="Components__Carousel">
     
     <div class="front-image">
         <a href="#" data-bs-toggle="modal" data-bs-target="#exampleLightbox">
-            <img data-bs-target="#lightboxExampleCarousel" data-bs-slide-to="0" src="@ImageUrls[0]" class="img-fluid">
+            <img data-bs-target="#lightboxExampleCarousel" data-bs-slide-to="0" src="@ImageUrls[0].ImageUrl" class="img-fluid">
         </a>
     </div>
 
@@ -18,13 +19,13 @@
                                 if (i == 0)
                                 {
                                     <div class="carousel-item text-center active">
-                                        <img src="@ImageUrls[i]" class="img-fluid mh-100">
+                                        <img src="@ImageUrls[i].ImageUrl" class="img-fluid mh-100">
                                     </div>
                                     continue;
                                 }
 
                                 <div class="carousel-item text-center">
-                                    <img src="@ImageUrls[i]" class="img-fluid mh-100">
+                                    <img src="@ImageUrls[i].ImageUrl" class="img-fluid mh-100">
                                 </div>
                             }
 
@@ -46,5 +47,5 @@
 </div>
 @code {
     [Parameter]
-    public List<string> ImageUrls { get; set; }
+    public List<OfferImageModel> ImageUrls { get; set; }
 }

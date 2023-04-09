@@ -10,6 +10,7 @@ using Troshka.Blazor.Models.Engine;
 using Troshka.Blazor.Models.EuroStandard;
 using Troshka.Blazor.Models.Material;
 using Troshka.Blazor.Models.Model;
+using Troshka.Blazor.Models.Offer;
 using Troshka.Blazor.Models.Offer.Car;
 using Troshka.Blazor.Models.Region;
 using Troshka.Blazor.Models.Transmission;
@@ -35,6 +36,8 @@ namespace Troshka.Blazor
             CreateMap<MaterialEntity, MaterialModel>();
 
             CreateMap<CreateCarOfferRequestModel, CarOfferEntity>();
+            CreateMap<OfferImageEntity, OfferImageModel>()
+                .ForPath(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Url));
             CreateMap<CarOfferEntity, CarOfferModel>()
                 .ForPath(dest => dest.Coupe, opt => opt.MapFrom(src => src.Coupe.Name))
                 .ForPath(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand.Name))
@@ -45,7 +48,8 @@ namespace Troshka.Blazor
                 .ForPath(dest => dest.Region, opt => opt.MapFrom(src => src.Region.Name))
                 .ForPath(dest => dest.Location, opt => opt.MapFrom(src => src.Location.Name))
                 .ForPath(dest => dest.EuroStandard, opt => opt.MapFrom(src => src.EuroStandard.Name))
-                .ForPath(dest => dest.Currency, opt => opt.MapFrom(src => src.Currency.Name));
+                .ForPath(dest => dest.Currency, opt => opt.MapFrom(src => src.Currency.Name))
+                .ForPath(dest => dest.Images, opt => opt.MapFrom(src => src.Images));
         }
     }
 }

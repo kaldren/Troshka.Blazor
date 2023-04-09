@@ -9,14 +9,17 @@
 @inject IOfferService OfferService
 
 <div class="Pages__Offer">
-    <main>
-        <Slideshow Id="@Id" />
-        <OfferInformation Id="@Id" />
-        <Comments Id="@Id" />
-    </main>
-    <aside>
-        @*<contact id="@id" />*@
-    </aside>
+    @if (_carOfferModel != null)
+    {
+        <main>
+            <Slideshow ImageUrls="@_carOfferModel.Images" />
+            <OfferInformation Id="@Id" />
+            <Comments Id="@Id" />
+        </main>
+        <aside>
+            @*<contact id="@id" />*@
+        </aside>
+    }
 </div>
 
 @code {
@@ -31,17 +34,9 @@
     {
         try
         {
+            _isLoading = true;
             var response = await OfferService.GetCarOfferAsync(Id);
             _carOfferModel = response.Value;
-
-            _isLoading = true;
-            //var client = HttpClientFactory.CreateClient("TroshkaAPINoAuth");
-            //var response = await client.GetAsync($"/api/cars/offers?$filter=Id eq '{Id}'");
-
-            //response.EnsureSuccessStatusCode();
-
-            //var data = await response.Content.ReadFromJsonAsync<List<CarOfferModel>>();
-            //_carOfferModel = data.FirstOrDefault();
         }
         finally
         {

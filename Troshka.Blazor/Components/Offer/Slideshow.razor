@@ -1,27 +1,23 @@
 ﻿@using AutoMapper;
+@using Troshka.Blazor.Models.Offer;
 
 @inject IMapper Mapper
 @inject IStringLocalizer<App> LocalizerShared
 
 <div class="Components__Slideshow">
-
-@*    @if (_isLoading)
+    @if (ImageUrls.Count > 0)
     {
-        <p>@LocalizerShared["Loading"]</p>
+        <Carousel ImageUrls=ImageUrls />
     }
-
-    @if (_carImageModel != default)
+    else
     {
-        <Carousel ImageUrls="_carImageModel.Select(p => p.ImageUrl).ToList()" />
-    }*@
+        // show upload btn
+    }
 </div>
 
 @code {
     [Parameter]
-    public string Id { get; set; }
-
-    //private List<CarOfferImagesModel> _carImageModel;
-    private bool _isLoading;
+    public List<OfferImageModel> ImageUrls { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

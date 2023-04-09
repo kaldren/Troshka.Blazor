@@ -62,12 +62,12 @@ builder.Services.AddLocalization(options => options.ResourcesPath = "Resources")
 
 var app = builder.Build();
 
-using (var serviceScope = app.Services.CreateScope())
-{
-    var context = serviceScope.ServiceProvider.GetRequiredService<TroshkaDbContext>();
-    context.Database.EnsureDeleted();
-    context.Database.EnsureCreated();
-}
+//using (var serviceScope = app.Services.CreateScope())
+//{
+//    var context = serviceScope.ServiceProvider.GetRequiredService<TroshkaDbContext>();
+//    context.Database.EnsureDeleted();
+//    context.Database.EnsureCreated();
+//}
 
 var cultures = builder.Configuration.GetSection("Cultures")
     .GetChildren().ToDictionary(x => x.Key, x => x.Value);
