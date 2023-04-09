@@ -1,0 +1,13 @@
+﻿Добави снимки
+
+<RadzenCard>
+    <RadzenUpload @ref="upload" Auto="false" Multiple="true" Url="upload/multiple" />
+    <RadzenButton Text="Upload" Click=@(args => upload.Upload()) />
+</RadzenCard>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    RadzenUpload upload;
+}

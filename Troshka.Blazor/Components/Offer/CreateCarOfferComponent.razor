@@ -40,6 +40,7 @@
 @using Troshka.Blazor.Services.Region;
 @using Troshka.Blazor.Services.Transmission;
 
+@inject NavigationManager Navigation
 @inject DialogService DialogService
 @inject ICarCoupeService CarCoupeService
 @inject ICarBrandService CarBrandService
@@ -53,7 +54,10 @@
 @inject IOfferService OfferService
 
 <div id="CreateCarOfferComponent">
-    <RadzenTemplateForm TItem="CreateCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
+    @if (step == 1)
+    {
+        <h2>Стъпка @step</h2>
+        <RadzenTemplateForm TItem="CreateCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
         <div>
             <div>
                 <RadzenDropDown @bind-Value=@_offerModel.CoupeId Data=@coupes TextProperty="Name" Placeholder="Купе" ValueProperty="Id" Name="Coupe" />
@@ -156,7 +160,7 @@
             <RadzenTextArea Placeholder="Описание..." @bind-Value=@_offerModel.Description />
 
         <div>
-            <RadzenNumeric Placeholder="Цена" Min="1" Max="10000" @bind-Value=@_offerModel.Price Disabled=@(_offerModel.PriceUponRequest == true) />
+            <RadzenNumeric Placeholder="Цена" Min="1" Max="20000000" @bind-Value=@_offerModel.Price Disabled=@(_offerModel.PriceUponRequest == true) />
             <RadzenDropDown @bind-Value=@_offerModel.CurrencyId Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" Disabled=@(_offerModel.PriceUponRequest == true) />
             <RadzenCheckBox @bind-Value=@_offerModel.PriceUponRequest Name="PriceUponRequest" />
             <RadzenLabel Text="При запитване" Component="PriceUponRequest" />
@@ -164,7 +168,16 @@
 
         <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
         <RadzenButton Text="Публикувай" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" />
-    </RadzenTemplateForm>
+        </RadzenTemplateForm>
+    }
+    else if (step == 2)
+    {
+        <h2>Стъпка @step</h2>
+        <p>Внимание: Можете да добавите снимки и на по-късен етап.</p>
+        <UploadPhotos />
+
+        <RadzenButton Text="Пропусни" Click=@OnSkipUpload />
+    }
 </div>
 
 @code {
@@ -185,6 +198,9 @@
     List<MaterialModel>? interiorMaterials;
     List<int>? months;
     List<int>? years;
+
+    string offerId;
+    private int step = 1;
 
     protected override async Task OnInitializedAsync()
     {
@@ -255,7 +271,13 @@
 
         if (result.IsSuccess)
         {
-            
+            offerId = result.Value.Id;
+            step++;
         }
+    }
+
+    void OnSkipUpload()
+    {
+        Navigation.NavigateTo($"offer/{offerId}");
     }
 }

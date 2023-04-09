@@ -1,0 +1,23 @@
+﻿@page "/offer/{id}/photos"
+@using Radzen.Blazor
+@using Radzen;
+@inject NavigationManager Navigation
+
+<h3>Редактирай снимките на обява @Id</h3>
+
+<RadzenCard>
+    <RadzenUpload @ref="upload" Auto="false" Multiple="true" Url="upload/multiple" />
+    <RadzenButton Text="Upload" Click=@(args => upload.Upload()) />
+</RadzenCard>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    RadzenUpload upload;
+
+    void OnCreateOfferClick()
+    {
+    }
+
+}
