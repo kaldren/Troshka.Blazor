@@ -56,7 +56,6 @@
 <div id="CreateCarOfferComponent">
     @if (step == 1)
     {
-        <h2>Стъпка @step</h2>
         <RadzenTemplateForm TItem="CreateCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
         <div>
             <div>
@@ -172,7 +171,7 @@
     }
     else if (step == 2)
     {
-        <h2>Стъпка @step</h2>
+        <h2>Добави снимки</h2>
         <p>Внимание: Можете да добавите снимки и на по-късен етап.</p>
         <UploadPhotos />
 

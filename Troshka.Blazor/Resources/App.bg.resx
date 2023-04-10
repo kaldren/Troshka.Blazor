@@ -474,4 +474,13 @@
   <data name="NoResultsFound" xml:space="preserve">
     <value>Не са намерени резултати с тези филтри.</value>
   </data>
+  <data name="Contact_Author" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="Contact_InfoTitle" xml:space="preserve">
+    <value>За контакти</value>
+  </data>
+  <data name="Contact_Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
 </root>

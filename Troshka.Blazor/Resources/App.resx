@@ -474,4 +474,13 @@
   <data name="NoResultsFound" xml:space="preserve">
     <value>No results found with these filters.</value>
   </data>
+  <data name="Contact_Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Contact_InfoTitle" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="Contact_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
 </root>

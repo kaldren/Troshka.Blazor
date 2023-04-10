@@ -3,22 +3,23 @@
 @using Radzen;
 @using Troshka.Blazor.Components.Offer
 @using Troshka.Blazor.Models.Offer.Car;
+@using Troshka.Blazor.Models.Offer;
 @using Troshka.Blazor.Services.Offer;
 
 @inject NavigationManager Navigation
 @inject IOfferService OfferService
 
 <div class="Pages__Offer">
-    @if (_carOfferModel != null)
+    @if (_carOfferModel != null && _contactModel != null)
     {
         <main>
             <Options />
             <Slideshow ImageUrls="@_carOfferModel.Images" />
-            <OfferInformation Id="@Id" />
+            <OfferInformation Model="@_carOfferModel" />
             <Comments Id="@Id" />
         </main>
         <aside>
-            @*<contact id="@id" />*@
+            <Contact Model="@_contactModel" />
         </aside>
     }
 </div>
@@ -29,6 +30,7 @@
     public string Id { get; set; }
 
     private CarOfferModel _carOfferModel;
+    private OfferContactModel _contactModel;
     private bool _isLoading;
 
     protected override async Task OnInitializedAsync()
@@ -38,6 +40,12 @@
             _isLoading = true;
             var response = await OfferService.GetCarOfferAsync(Id);
             _carOfferModel = response.Value;
+            _contactModel = new()
+            {
+                Id = "123",
+                DisplayName = "Kaloyan Drenski",
+                Phone = "0888 77 88 77"
+            };
         }
         finally
         {
