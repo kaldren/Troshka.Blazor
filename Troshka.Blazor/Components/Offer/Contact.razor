@@ -3,7 +3,6 @@
 @using Troshka.Blazor.Models.Offer;
 
 @inject IStringLocalizer<App> LocalizerContact
-@inject IStringLocalizer<App> LocalizerShared
 
 <div class="Components__Contact">
     @if (Model != default)
@@ -27,9 +26,6 @@
 </div>
 
 @code {
-    [Parameter]
-    public CarOfferModel Id { get; set; }
-
     [Parameter]
     public OfferContactModel Model { get; set; }
 }

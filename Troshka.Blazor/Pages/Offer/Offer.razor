@@ -8,8 +8,13 @@
 
 @inject NavigationManager Navigation
 @inject IOfferService OfferService
+@inject IStringLocalizer<App> Localizer
 
 <div class="Pages__Offer">
+    @if (_isLoading)
+    {
+        <p>@Localizer["Loading"]</p>
+    }
     @if (_carOfferModel != null && _contactModel != null)
     {
         <main>
