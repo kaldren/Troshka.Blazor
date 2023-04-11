@@ -1,3 +1,16 @@
-﻿<div class="Components__Options">
-    <RadzenButton Text="Редактирай обявата" ButtonStyle="ButtonStyle.Success" />
+﻿@inject NavigationManager Navigation
+
+<div class="Components__Options">
+    <RadzenButton Text="Редактирай обявата" ButtonStyle="ButtonStyle.Success" Click=OnEditClick />
 </div>
+
+@code {
+
+    [Parameter]
+    public string OfferId { get; set; }
+
+    void OnEditClick()
+    {
+        Navigation.NavigateTo($"offer/{OfferId}/edit");
+    }
+}

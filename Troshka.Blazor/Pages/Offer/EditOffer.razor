@@ -1,0 +1,22 @@
+﻿@page "/offer/{id}/edit"
+@using Radzen.Blazor
+@using Radzen;
+@using Troshka.Blazor.Components.Offer
+@using Troshka.Blazor.Models.Offer.Car;
+@using Troshka.Blazor.Models.Offer;
+@using Troshka.Blazor.Services.Offer;
+
+@inject NavigationManager Navigation
+@inject IOfferService OfferService
+@inject IStringLocalizer<App> Localizer
+
+<div class="Pages__EditOffer">
+    <p>Edit offer @Id</p>
+</div>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+}

@@ -18,7 +18,7 @@
     @if (_carOfferModel != null && _contactModel != null)
     {
         <main>
-            <Options />
+            <Options OfferId="@Id" />
             <Slideshow ImageUrls="@_carOfferModel.Images" />
             <OfferInformation Model="@_carOfferModel" />
             <Comments Id="@Id" />
