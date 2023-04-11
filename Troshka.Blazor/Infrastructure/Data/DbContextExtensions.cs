@@ -8135,8 +8135,19 @@ namespace Troshka.Blazor.Infrastructure.Data
                 .HasForeignKey(o => o.AuthorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<UserEntity>()
+            return modelBuilder;
+        }
+
+        public static ModelBuilder AddUserComments(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserCommentsEntity>()
                 .ToTable("UserComments", schema: SchemaNames.Troshka);
+
+            modelBuilder.Entity<UserCommentsEntity>()
+                .HasOne(p => p.Author);
+
+            modelBuilder.Entity<UserCommentsEntity>()
+                .HasOne(p => p.Recipient);
 
             return modelBuilder;
         }
