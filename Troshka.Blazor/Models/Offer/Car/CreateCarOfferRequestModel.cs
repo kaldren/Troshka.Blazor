@@ -6,9 +6,8 @@ namespace Troshka.Blazor.Models.Offer.Car
     {
         [Required]
         public string AuthorId { get; set; }
-
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
 
         [Required]
         public string CoupeId { get; set; }

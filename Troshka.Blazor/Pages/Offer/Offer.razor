@@ -47,9 +47,10 @@
             _carOfferModel = response.Value;
             _contactModel = new()
             {
-                Id = "123",
-                DisplayName = "Kaloyan Drenski",
-                Phone = "0888 77 88 77"
+                Id = _carOfferModel.AuthorId,
+                Name = _carOfferModel.AuthorName,
+                Email = _carOfferModel.AuthorEmail,
+                Phone = _carOfferModel.AuthorPhone
             };
         }
         finally

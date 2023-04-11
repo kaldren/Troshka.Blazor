@@ -270,8 +270,8 @@
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         model.AuthorId = user.Claims.FirstOrDefault(x => x.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier")?.Value;
-        model.FirstName = user.Claims?.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname")?.Value;
-        model.LastName = user.Claims?.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname")?.Value;
+        model.Name = user.Claims?.FirstOrDefault(x => x.Type == "name").Value;
+        model.Email = user?.Claims?.FirstOrDefault(x => x.Type == "emails")?.Value;
 
         var result = await OfferService.CreateCarOfferAsync(model);
 

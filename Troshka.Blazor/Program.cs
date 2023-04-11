@@ -15,6 +15,7 @@ using Troshka.Blazor.Services.Material;
 using Troshka.Blazor.Services.Offer;
 using Troshka.Blazor.Services.Region;
 using Troshka.Blazor.Services.Transmission;
+using Troshka.Blazor.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,7 @@ builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 builder.Services.AddScoped<IEuroStandardService, EuroStandardService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
 builder.Services.AddScoped<IOfferService, OfferService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileStorage, FileStorage>();
 
 #region Localization
