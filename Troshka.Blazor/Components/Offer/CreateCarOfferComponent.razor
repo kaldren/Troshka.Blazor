@@ -52,6 +52,7 @@
 @inject IEuroStandardService EuroStandardService
 @inject IMaterialService MaterialService
 @inject IOfferService OfferService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div id="CreateCarOfferComponent">
     @if (step == 1)
@@ -266,6 +267,10 @@
 
     async Task OnFormSubmit(CreateCarOfferRequestModel model)
     {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        model.AuthorId = user?.Identity?.Name;
+
         var result = await OfferService.CreateCarOfferAsync(model);
 
         if (result.IsSuccess)

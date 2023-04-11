@@ -4,6 +4,7 @@ namespace Troshka.Blazor.Models.Offer.Car
 {
     public class CreateCarOfferRequestModel
     {
+        public string AuthorId { get; set; }
         [Required]
         public string CoupeId { get; set; }
         [Required]

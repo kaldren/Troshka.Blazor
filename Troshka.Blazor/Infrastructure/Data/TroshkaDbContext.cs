@@ -2,6 +2,7 @@
 using Troshka.Blazor.Domain.Entities;
 using Troshka.Blazor.Domain.Entities.Car;
 using Troshka.Blazor.Domain.Entities.Region;
+using Troshka.Blazor.Domain.Entities.User;
 
 namespace Troshka.Blazor.Infrastructure.Data
 {
@@ -20,6 +21,8 @@ namespace Troshka.Blazor.Infrastructure.Data
         public DbSet<MaterialEntity> Materials { get; set; }
         public DbSet<CarOfferEntity> CarOffers { get; set; }
         public DbSet<OfferImageEntity> OfferImages { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<UserCommentsEntity> UserComments { get; set; }
 
         public TroshkaDbContext(DbContextOptions<TroshkaDbContext> options) : base(options)
         {
@@ -89,6 +92,12 @@ namespace Troshka.Blazor.Infrastructure.Data
             modelBuilder
                 .AddOfferImages();
             #endregion Images
+
+            #region Users
+            modelBuilder
+                .AddUsers();
+            #endregion Users
+
         }
 
         private static class SchemaNames

@@ -2,6 +2,7 @@
 using Troshka.Blazor.Domain.Entities;
 using Troshka.Blazor.Domain.Entities.Car;
 using Troshka.Blazor.Domain.Entities.Region;
+using Troshka.Blazor.Domain.Entities.User;
 
 namespace Troshka.Blazor.Infrastructure.Data
 {
@@ -8119,6 +8120,23 @@ namespace Troshka.Blazor.Infrastructure.Data
                 .HasMany(c => c.Images)
                 .WithOne(o => o.CarOffer)
                 .HasForeignKey(o => o.OfferId);
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder AddUsers(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserEntity>()
+                .ToTable("Users", schema: SchemaNames.Troshka);
+
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(c => c.Comments)
+                .WithOne(o => o.Author)
+                .HasForeignKey(o => o.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserEntity>()
+                .ToTable("UserComments", schema: SchemaNames.Troshka);
 
             return modelBuilder;
         }
