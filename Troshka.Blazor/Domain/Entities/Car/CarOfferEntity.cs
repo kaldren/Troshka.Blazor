@@ -1,5 +1,6 @@
 ﻿using Troshka.Blazor.Domain.Entities.Region;
 using Troshka.Blazor.Domain.Entities.User;
+using Troshka.Blazor.Enums;
 
 namespace Troshka.Blazor.Domain.Entities.Car
 {
@@ -28,6 +29,8 @@ namespace Troshka.Blazor.Domain.Entities.Car
         public virtual ICollection<OfferImageEntity>? Images { get; set; }
         public string AuthorId { get; set; }
         public virtual UserEntity Author { get; set; }
+        public string CategoryId { get; set; }
+        public virtual CategoryEntity Category { get; set; } = new CategoryEntity { Name = CategoryTypeConstants.Cars };
         public string? Description { get; set; }
         public string? VIN { get; set; }
         public int Horsepower { get; set; }

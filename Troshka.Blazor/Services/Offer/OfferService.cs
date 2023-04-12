@@ -40,6 +40,7 @@ namespace Troshka.Blazor.Services.Offer
                 await _userService.CreateUserAsync(user);
 
                 await context.CarOffers.AddAsync(entity);
+
                 var result = await context.SaveChangesAsync();
 
                 if (result > 0)
@@ -103,12 +104,6 @@ namespace Troshka.Blazor.Services.Offer
             {
                 throw;
             }
-        }
-
-        private bool ValidateCreateCarOfferAsync(CreateCarOfferRequestModel model)
-        {
-
-            return false;
         }
     }
 }

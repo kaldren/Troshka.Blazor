@@ -11,12 +11,28 @@
 @inject IStringLocalizer<App> Localizer
 
 <div class="Pages__EditOffer">
-    <p>Edit offer @Id</p>
+    @if (selectedType != null)
+    {
+        <DynamicComponent Type="@selectedType" />
+    }
 </div>
 
 @code {
-
     [Parameter]
     public string Id { get; set; }
 
+    [Parameter]
+    public string VehicleType { get; set; }
+
+    private Type? selectedType;
+
+    protected override void OnInitialized()
+    {
+        switch (VehicleType.ToLower())
+        {
+            case "car":
+                selectedType = Type.GetType("Troshka.Blazor.Components.Offer.Car.EditCarOfferComponent");
+                break;
+        }
+    }
 }

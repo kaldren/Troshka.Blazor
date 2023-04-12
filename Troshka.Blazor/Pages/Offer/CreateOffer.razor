@@ -1,5 +1,5 @@
 ﻿@page "/create-offer"
-@using Troshka.Blazor.Components.Offer
+@using Troshka.Blazor.Components.Offer.Car
 
 <div id="CreateOffer">
     <h3>Публикувай обява</h3>
@@ -26,7 +26,7 @@
 
     void OnCarsClick()
     {
-        selectedType = Type.GetType("Troshka.Blazor.Components.Offer.CreateCarOfferComponent");
+        selectedType = Type.GetType("Troshka.Blazor.Components.Offer.Car.CreateCarOfferComponent");
     }
 
     void OnBusesClick() {}

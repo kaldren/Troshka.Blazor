@@ -3,6 +3,7 @@ using Troshka.Blazor.Domain.Entities;
 using Troshka.Blazor.Domain.Entities.Car;
 using Troshka.Blazor.Domain.Entities.Region;
 using Troshka.Blazor.Domain.Entities.User;
+using Troshka.Blazor.Enums;
 
 namespace Troshka.Blazor.Infrastructure.Data
 {
@@ -38,14 +39,14 @@ namespace Troshka.Blazor.Infrastructure.Data
             modelBuilder
                 .Entity<CategoryEntity>()
                 .HasData(
-                    new CategoryEntity { Id = "0Uun56AGjKNM2f07qMBS", Name = "Cars" },
-                    new CategoryEntity { Id = "AhHuT41lRddLH1wachlm", Name = "Buses" },
-                    new CategoryEntity { Id = "DARdvjHJcTyGCYGekfIn", Name = "Motorcycles" },
-                    new CategoryEntity { Id = "ExCL3LNxUqXNC8LFF8rL", Name = "Trucks" },
-                    new CategoryEntity { Id = "GFF7R0xsM4muSxEG8k0J", Name = "Caravans" },
-                    new CategoryEntity { Id = "lnm5mTuNV56JTQQYWPRe", Name = "Boats" },
-                    new CategoryEntity { Id = "NUSX1N5R2xUS9WfTo3lp", Name = "Construction" },
-                    new CategoryEntity { Id = "poo2JeVEhMn8wJz0KJdR", Name = "Agriciltural" }
+                    new CategoryEntity { Id = "0Uun56AGjKNM2f07qMBS", Name = CategoryTypeConstants.Cars },
+                    new CategoryEntity { Id = "AhHuT41lRddLH1wachlm", Name = CategoryTypeConstants.Buses },
+                    new CategoryEntity { Id = "DARdvjHJcTyGCYGekfIn", Name = CategoryTypeConstants.Motorcycles },
+                    new CategoryEntity { Id = "ExCL3LNxUqXNC8LFF8rL", Name = CategoryTypeConstants.Trucks },
+                    new CategoryEntity { Id = "GFF7R0xsM4muSxEG8k0J", Name = CategoryTypeConstants.Caravans },
+                    new CategoryEntity { Id = "lnm5mTuNV56JTQQYWPRe", Name = CategoryTypeConstants.Boats },
+                    new CategoryEntity { Id = "NUSX1N5R2xUS9WfTo3lp", Name = CategoryTypeConstants.Construction },
+                    new CategoryEntity { Id = "poo2JeVEhMn8wJz0KJdR", Name = CategoryTypeConstants.Agriciltural }
                 );
             #endregion Categories
 
@@ -97,7 +98,6 @@ namespace Troshka.Blazor.Infrastructure.Data
             modelBuilder
                 .AddUsers();
             #endregion Users
-
         }
 
         private static class SchemaNames
