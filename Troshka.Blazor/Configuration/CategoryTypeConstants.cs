@@ -1,4 +1,4 @@
-﻿namespace Troshka.Blazor.Enums
+﻿namespace Troshka.Blazor.Configuration
 {
     public static class CategoryTypeConstants
     {

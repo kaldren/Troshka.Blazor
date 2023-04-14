@@ -2,18 +2,21 @@
 @using Radzen.Blazor
 @using Radzen;
 @using Troshka.Blazor.Components.Offer
+@using Troshka.Blazor.Configuration;
 @using Troshka.Blazor.Models.Offer.Car;
 @using Troshka.Blazor.Models.Offer;
+@using Troshka.Blazor.Services.Category;
 @using Troshka.Blazor.Services.Offer;
 
 @inject NavigationManager Navigation
 @inject IOfferService OfferService
 @inject IStringLocalizer<App> Localizer
+@inject ICategoryService CategoryService
 
 <div class="Pages__EditOffer">
     @if (selectedType != null)
     {
-        <DynamicComponent Type="@selectedType" />
+        <DynamicComponent Type="@selectedType" Parameters="@_params" />
     }
 </div>
 
@@ -26,13 +29,17 @@
 
     private Type? selectedType;
 
-    protected override void OnInitialized()
+    private Dictionary<string, object> _params;
+
+    protected override async Task OnInitializedAsync()
     {
-        switch (VehicleType.ToLower())
+        // Get offer type
+        var category = await CategoryService.GetByOfferIdAsync(Id);
+
+        if (category.Name == CategoryTypeConstants.Cars)
         {
-            case "car":
-                selectedType = Type.GetType("Troshka.Blazor.Components.Offer.Car.EditCarOfferComponent");
-                break;
+            _params = new() { { "OfferId", Id }, };
+            selectedType = Type.GetType("Troshka.Blazor.Components.Offer.Car.EditCarOfferComponent");
         }
     }
 }

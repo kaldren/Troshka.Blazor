@@ -17,13 +17,24 @@ namespace Troshka.Blazor.Services.Category
             _mapper = mapper;
         }
 
-        public async Task<List<CategoryModel>> GetAll()
+        public async Task<List<CategoryModel>> GetAllAsync()
         {
             using var context = _dbFactory.CreateDbContext();
 
             List<CategoryEntity> categories = await context.Category.AsNoTracking().ToListAsync();
 
             return _mapper.Map<List<CategoryModel>>(categories);
+        }
+
+        public async Task<CategoryModel> GetByOfferIdAsync(string offerId)
+        {
+            using var context = _dbFactory.CreateDbContext();
+
+            var result = await context.Set<CategoryModel>()
+                                       .FromSql($"Troshka.SP_GetOfferCategoriesByOfferId {offerId}")
+                                       .ToListAsync();
+
+            return result.First();
         }
     }
 }

@@ -1,3 +1,13 @@
-﻿@namespace Troshka.Blazor.Components.Offer.Car.EditCarOfferComponent
+﻿@namespace Troshka.Blazor.Components.Offer.Car
 
-EDIT CAR
+<p>EDIT CAR @OfferId</p>
+
+@code {
+    [Parameter]
+    public string OfferId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+}
