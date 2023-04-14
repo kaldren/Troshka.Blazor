@@ -1,13 +1,297 @@
 ﻿@namespace Troshka.Blazor.Components.Offer.Car
 
+@using Radzen;
+@using Troshka.Blazor.Models;
+@using Troshka.Blazor.Models.Brand;
+@using Troshka.Blazor.Models.Category;
+@using Troshka.Blazor.Models.Coupe;
+@using Troshka.Blazor.Models.Currency;
+@using Troshka.Blazor.Models.Engine;
+@using Troshka.Blazor.Models.EuroStandard;
+@using Troshka.Blazor.Models.Material;
+@using Troshka.Blazor.Models.Model;
+@using Troshka.Blazor.Models.Offer;
+@using Troshka.Blazor.Models.Region;
+@using Troshka.Blazor.Models.Transmission;
+@using Troshka.Blazor.Services.Category;
+@using Troshka.Blazor.Services.Coupe;
+@using Troshka.Blazor.Services.Currency;
+@using Troshka.Blazor.Services.Engine;
+@using Troshka.Blazor.Services.EuroStandard;
+@using Troshka.Blazor.Services.Material;
+@using Troshka.Blazor.Services.Offer;
+@using Troshka.Blazor.Services.Region;
+@using Troshka.Blazor.Services.Transmission;
+@using Troshka.Blazor.Models.Offer.Car;
+
+@using Troshka.Blazor.Models.Brand;
+@using Troshka.Blazor.Models.Coupe;
+@using Troshka.Blazor.Models.Currency;
+@using Troshka.Blazor.Models.Engine;
+@using Troshka.Blazor.Models.Model;
+@using Troshka.Blazor.Models.Offer.Car;
+@using Troshka.Blazor.Models.Offer.Car;
+@using Troshka.Blazor.Models.Region;
+@using Troshka.Blazor.Models.Transmission;
+@using Troshka.Blazor.Services.Category;
+@using Troshka.Blazor.Services.Coupe;
+@using Troshka.Blazor.Services.Currency;
+@using Troshka.Blazor.Services.Engine;
+@using Troshka.Blazor.Services.Region;
+@using Troshka.Blazor.Services.Transmission;
+
+@inject NavigationManager Navigation
+@inject DialogService DialogService
+@inject ICarCoupeService CarCoupeService
+@inject ICarBrandService CarBrandService
+@inject ICarModelService CarModelService
+@inject IRegionService RegionService
+@inject IEngineService EngineService
+@inject ITransmissionService TransmissionService
+@inject ICurrencyService CurrencyService
+@inject IEuroStandardService EuroStandardService
+@inject IMaterialService MaterialService
+@inject IOfferService OfferService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
 <p>EDIT CAR @OfferId</p>
+
+<div id="EditCarOfferComponent">
+    @if (step == 1)
+    {
+        <RadzenTemplateForm TItem="CreateCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
+            <div>
+                <div>
+                    <RadzenDropDown @bind-Value=@_carOfferModel.Coupe Data=@coupes TextProperty="Name" Placeholder="Купе" ValueProperty="Id" Name="Coupe" />
+                    <RadzenRequiredValidator Component="Coupe" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.BrandId Data=@brands TextProperty="Name" Placeholder="Марка" ValueProperty="Id" Name="Brand" Change=@OnCarBrandChange />
+                    <RadzenRequiredValidator Component="Brand" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.ModelId Data=@models TextProperty="Name" Placeholder="Модел" ValueProperty="Id" Name="Model" Disabled=string.IsNullOrWhiteSpace(_offerModel.BrandId) />
+                    <RadzenRequiredValidator Component="Model" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <RadzenTextBox Placeholder="Модификация" @bind-Value=@_offerModel.Modification />
+                </div>
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.EngineId Data=@engines TextProperty="Name" Placeholder="Двигател" ValueProperty="Id" Name="Engine" />
+                    <RadzenRequiredValidator Component="Engine" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.TransmissionId Data=@transmissions TextProperty="Name" Placeholder="Скоростна кутия" ValueProperty="Id" Name="Transmission" />
+                    <RadzenRequiredValidator Component="Transmission" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <RadzenNumeric Placeholder="Мощност (кс)" Min="1" Max="10000" @bind-Value=@_offerModel.Horsepower Name="Horsepower" />
+                    <RadzenRequiredValidator Component="Horsepower" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+
+                <div>
+                    <RadzenNumeric Placeholder="Кубатура (куб.см)" Min="1" Max="10000" @bind-Value=@_offerModel.Cubics Name="Cubics" />
+                    <RadzenRequiredValidator Component="Cubics" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+
+                <div>
+                    <RadzenNumeric Placeholder="Пробег (км)" Min="1" Max="5000000" @bind-Value=@_offerModel.Mileage Name="Mileage" />
+                    <RadzenRequiredValidator Component="Mileage" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.EuroStandardId Data=@euroStandards Placeholder="Евростандарт" TextProperty="Name" ValueProperty="Id" Name="Eurostandard" />
+                    <RadzenRequiredValidator Component="Eurostandard" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.MaterialId Data=@interiorMaterials TextProperty="Name" Placeholder="Салон" ValueProperty="Id" Name="MaterialModel" />
+                    <RadzenRequiredValidator Component="MaterialModel" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.MonthProduced Data=@months Placeholder="Месец на производство" Name="MonthProduced" />
+                    <RadzenRequiredValidator Component="MonthProduced" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.YearProduced Data=@years Placeholder="Година на производство" Name="YearProduced" />
+                    <RadzenRequiredValidator Component="YearProduced" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.RegionId Data=@regions TextProperty="Name" Placeholder="Регион" ValueProperty="Id" Name="Region" Change=@OnRegionChange />
+                    <RadzenRequiredValidator Component="Region" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+                <div>
+                    <RadzenDropDown @bind-Value=@_offerModel.LocationId Data=@locations TextProperty="Name" Placeholder="Населено място" ValueProperty="Id" Name="Location" Disabled=string.IsNullOrWhiteSpace(_offerModel.RegionId) />
+                    <RadzenRequiredValidator Component="Location" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+            </div>
+
+            <div>
+                <RadzenTextBox Placeholder="VIN номер" @bind-Value=@_offerModel.VIN class="vin-number" />
+            </div>
+
+            <div>
+                <div>
+                    <RadzenRadioButtonList @bind-Value=@_offerModel.Condition TValue="int" Name="Condition">
+                        <Items>
+                            <RadzenRadioButtonListItem Text="Нов" Value="1" />
+                            <RadzenRadioButtonListItem Text="Употребяван" Value="2" />
+                            <RadzenRadioButtonListItem Text="За части" Value="3" />
+                        </Items>
+                    </RadzenRadioButtonList>
+                    <RadzenRequiredValidator Component="Condition" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                </div>
+            </div>
+
+            <RadzenTextArea Placeholder="Описание..." @bind-Value=@_offerModel.Description />
+
+            <div>
+                <RadzenNumeric Placeholder="Цена" Min="1" Max="20000000" @bind-Value=@_offerModel.Price Disabled=@(_offerModel.PriceUponRequest == true) />
+                <RadzenDropDown @bind-Value=@_offerModel.CurrencyId Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" Disabled=@(_offerModel.PriceUponRequest == true) />
+                <RadzenCheckBox @bind-Value=@_offerModel.PriceUponRequest Name="PriceUponRequest" />
+                <RadzenLabel Text="При запитване" Component="PriceUponRequest" />
+            </div>
+
+            <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
+            <RadzenButton Text="Запази" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" />
+        </RadzenTemplateForm>
+    }
+    else if (step == 2)
+    {
+        <h2>Добави снимки</h2>
+        <p>Внимание: Можете да добавите снимки и на по-късен етап.</p>
+        <UploadPhotos />
+
+        <RadzenButton Text="Пропусни" Click=@OnSkipUpload />
+    }
+</div>
 
 @code {
     [Parameter]
     public string OfferId { get; set; }
 
+    private CarOfferModel _carOfferModel = new();
+    private CreateCarOfferRequestModel _offerModel = new();
+
+    bool popup = true;
+    DateTime? dateProduced = DateTime.Now;
+
+    List<CoupeModel>? coupes;
+    List<BrandModel>? brands;
+    List<ModelModel>? models;
+    List<RegionModel>? regions;
+    List<LocationModel>? locations;
+    List<EngineModel>? engines;
+    List<TransmissionModel>? transmissions;
+    List<CurrencyModel>? currencies;
+    List<EuroStandardModel>? euroStandards;
+    List<MaterialModel>? interiorMaterials;
+    List<int>? months;
+    List<int>? years;
+
+    string offerId2;
+    private int step = 1;
+
     protected override async Task OnInitializedAsync()
     {
-        
+        // Get current car offer
+        _carOfferModel = (await OfferService.GetCarOfferAsync(OfferId)).Value;
+
+        coupes = await CarCoupeService.GetAll();
+
+        brands = await CarBrandService.GetAll();
+        regions = await RegionService.GetAllRegions();
+        engines = await EngineService.GetAll();
+        currencies = await CurrencyService.GetAll();
+        transmissions = await TransmissionService.GetAll();
+        euroStandards = await EuroStandardService.GetAll();
+        interiorMaterials = await MaterialService.GetAll();
+
+        months = GenerateMonths();
+        years = GenerateYears();
+    }
+
+    async Task OnCarBrandChange()
+    {
+        if (!string.IsNullOrWhiteSpace(_offerModel.BrandId))
+            models = await CarModelService.GetAll(_offerModel.BrandId);
+    }
+
+    async Task OnRegionChange()
+    {
+        if (!string.IsNullOrWhiteSpace(_offerModel.RegionId))
+            locations = await RegionService.GetAllLocations(_offerModel.RegionId);
+    }
+
+    async Task ShowFiltersDialog()
+    {
+        await DialogService.OpenAsync("Филтри", ds =>
+            @<OfferFilters Filters=_offerModel.Filters />,
+    new DialogOptions() { CloseDialogOnOverlayClick = true, CssClass = "Filters" });
+    }
+
+    List<int> GenerateMonths()
+    {
+        return new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+    }
+
+    List<int> GenerateYears()
+    {
+        List<int> years = new();
+
+        for (int i = DateTime.Now.Year; i >= 1900; i--)
+        {
+            years.Add(i);
+        }
+
+        return years;
+    }
+
+    List<int> GenerateEuroStandards()
+    {
+        return new List<int> { 1, 2, 3, 4, 5, 6 };
+    }
+
+    void OnPriceUponRequestChange()
+    {
+
+    }
+
+    async Task OnFormSubmit(CreateCarOfferRequestModel model)
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        model.AuthorId = user.Claims.FirstOrDefault(x => x.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier")?.Value;
+        model.Name = user.Claims?.FirstOrDefault(x => x.Type == "name").Value;
+        model.Email = user?.Claims?.FirstOrDefault(x => x.Type == "emails")?.Value;
+
+        var result = await OfferService.CreateCarOfferAsync(model);
+
+        if (result.IsSuccess)
+        {
+            offerId2 = result.Value.Id;
+            step++;
+        }
+    }
+
+    void OnSkipUpload()
+    {
+        Navigation.NavigateTo($"offer/{offerId2}");
     }
 }

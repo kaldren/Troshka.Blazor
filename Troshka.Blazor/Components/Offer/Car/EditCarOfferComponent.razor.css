@@ -1,0 +1,42 @@
+﻿#EditCarOfferComponent ::deep form {
+    display: flex;
+    flex-direction: column;
+}
+
+    #EditCarOfferComponent ::deep form > div {
+        display: flex;
+        margin: 0.75rem 0;
+        align-items: center;
+    }
+
+#EditCarOfferComponent ::deep .vin-number {
+    max-width: 100%;
+    width: 300px;
+}
+
+#EditCarOfferComponent ::deep form > div > div {
+    display: flex;
+    position: relative;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+#EditCarOfferComponent ::deep .rz-message-popup {
+    bottom: -15px;
+}
+
+#EditCarOfferComponent ::deep .rz-textarea {
+    min-height: 200px;
+}
+
+#EditCarOfferComponent ::deep button {
+    margin: 1rem 0;
+}
+
+#EditCarOfferComponent ::deep .FiltersButton {
+    max-width: 100%;
+    width: 150px;
+}
+
+#EditCarOfferComponent ::deep .rz-spinner-button {
+    display: none
+}

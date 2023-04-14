@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Components\Offer\Car\EditCarOfferComponent.razor.css" />
     <None Remove="Components\Offer\CreateOfferComponent.razor.css" />
     <None Remove="Components\Offer\OfferFilters - Copy.razor.css" />
     <None Remove="Components\Offer\OfferFilters.razor.css" />
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Components\Offer\Car\EditCarOfferComponent.razor.css" />
     <Content Include="Components\Offer\OfferFilters.razor.css" />
     <Content Include="Components\Offer\Options.razor.css" />
     <Content Include="Pages\Offer\CreateOffer.razor.css" />
