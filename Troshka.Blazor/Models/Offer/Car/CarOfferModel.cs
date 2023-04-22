@@ -10,14 +10,23 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public string Coupe { get; set; }
+        public string BrandId { get; set; }
         public string Brand { get; set; }
+        public string ModelId { get; set; }
         public string Model { get; set; }
+        public string EngineId { get; set; }
         public string Engine { get; set; }
+        public string TransmissionId { get; set; }
         public string Transmission { get; set; }
+        public string MaterialId { get; set; }
         public string Material { get; set; }
+        public string RegionId { get; set; }
         public string Region { get; set; }
+        public string LocationId { get; set; }
         public string Location { get; set; }
+        public string EuroStandardId { get; set; }
         public string EuroStandard { get; set; }
+        public string CurrencyId { get; set; }
         public string Currency { get; set; }
         public List<OfferImageModel> Images { get; set; }
         public int Horsepower { get; set; }

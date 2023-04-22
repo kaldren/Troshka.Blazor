@@ -75,3 +75,8 @@ a, .btn-link {
     width: 1400px !important;
     max-width: 100% !important;
 }
+
+.rz-button {
+    max-width: 100%;
+    width: 150px;
+}

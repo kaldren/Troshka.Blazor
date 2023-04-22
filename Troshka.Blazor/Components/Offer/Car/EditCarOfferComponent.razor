@@ -1,5 +1,6 @@
 ﻿@namespace Troshka.Blazor.Components.Offer.Car
 
+@using AutoMapper;
 @using Radzen;
 @using Troshka.Blazor.Models;
 @using Troshka.Blazor.Models.Brand;
@@ -53,140 +54,173 @@
 @inject IMaterialService MaterialService
 @inject IOfferService OfferService
 @inject AuthenticationStateProvider AuthenticationStateProvider
-
-<p>EDIT CAR @OfferId</p>
+@inject IMapper Mapper
 
 <div id="EditCarOfferComponent">
-    @if (step == 1)
+    @if (_carOfferModel == null)
     {
-        <RadzenTemplateForm TItem="CreateCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
-            <div>
-                <div>
-                    <RadzenDropDown @bind-Value=@_carOfferModel.Coupe Data=@coupes TextProperty="Name" Placeholder="Купе" ValueProperty="Id" Name="Coupe" />
-                    <RadzenRequiredValidator Component="Coupe" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.BrandId Data=@brands TextProperty="Name" Placeholder="Марка" ValueProperty="Id" Name="Brand" Change=@OnCarBrandChange />
-                    <RadzenRequiredValidator Component="Brand" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.ModelId Data=@models TextProperty="Name" Placeholder="Модел" ValueProperty="Id" Name="Model" Disabled=string.IsNullOrWhiteSpace(_offerModel.BrandId) />
-                    <RadzenRequiredValidator Component="Model" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <RadzenTextBox Placeholder="Модификация" @bind-Value=@_offerModel.Modification />
-                </div>
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.EngineId Data=@engines TextProperty="Name" Placeholder="Двигател" ValueProperty="Id" Name="Engine" />
-                    <RadzenRequiredValidator Component="Engine" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.TransmissionId Data=@transmissions TextProperty="Name" Placeholder="Скоростна кутия" ValueProperty="Id" Name="Transmission" />
-                    <RadzenRequiredValidator Component="Transmission" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <RadzenNumeric Placeholder="Мощност (кс)" Min="1" Max="10000" @bind-Value=@_offerModel.Horsepower Name="Horsepower" />
-                    <RadzenRequiredValidator Component="Horsepower" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-
-                <div>
-                    <RadzenNumeric Placeholder="Кубатура (куб.см)" Min="1" Max="10000" @bind-Value=@_offerModel.Cubics Name="Cubics" />
-                    <RadzenRequiredValidator Component="Cubics" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-
-                <div>
-                    <RadzenNumeric Placeholder="Пробег (км)" Min="1" Max="5000000" @bind-Value=@_offerModel.Mileage Name="Mileage" />
-                    <RadzenRequiredValidator Component="Mileage" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.EuroStandardId Data=@euroStandards Placeholder="Евростандарт" TextProperty="Name" ValueProperty="Id" Name="Eurostandard" />
-                    <RadzenRequiredValidator Component="Eurostandard" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.MaterialId Data=@interiorMaterials TextProperty="Name" Placeholder="Салон" ValueProperty="Id" Name="MaterialModel" />
-                    <RadzenRequiredValidator Component="MaterialModel" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.MonthProduced Data=@months Placeholder="Месец на производство" Name="MonthProduced" />
-                    <RadzenRequiredValidator Component="MonthProduced" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.YearProduced Data=@years Placeholder="Година на производство" Name="YearProduced" />
-                    <RadzenRequiredValidator Component="YearProduced" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-            </div>
-
-            <div>
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.RegionId Data=@regions TextProperty="Name" Placeholder="Регион" ValueProperty="Id" Name="Region" Change=@OnRegionChange />
-                    <RadzenRequiredValidator Component="Region" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-                <div>
-                    <RadzenDropDown @bind-Value=@_offerModel.LocationId Data=@locations TextProperty="Name" Placeholder="Населено място" ValueProperty="Id" Name="Location" Disabled=string.IsNullOrWhiteSpace(_offerModel.RegionId) />
-                    <RadzenRequiredValidator Component="Location" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-            </div>
-
-            <div>
-                <RadzenTextBox Placeholder="VIN номер" @bind-Value=@_offerModel.VIN class="vin-number" />
-            </div>
-
-            <div>
-                <div>
-                    <RadzenRadioButtonList @bind-Value=@_offerModel.Condition TValue="int" Name="Condition">
-                        <Items>
-                            <RadzenRadioButtonListItem Text="Нов" Value="1" />
-                            <RadzenRadioButtonListItem Text="Употребяван" Value="2" />
-                            <RadzenRadioButtonListItem Text="За части" Value="3" />
-                        </Items>
-                    </RadzenRadioButtonList>
-                    <RadzenRequiredValidator Component="Condition" Text="Задължително поле" Popup=@popup Style="position: absolute" />
-                </div>
-            </div>
-
-            <RadzenTextArea Placeholder="Описание..." @bind-Value=@_offerModel.Description />
-
-            <div>
-                <RadzenNumeric Placeholder="Цена" Min="1" Max="20000000" @bind-Value=@_offerModel.Price Disabled=@(_offerModel.PriceUponRequest == true) />
-                <RadzenDropDown @bind-Value=@_offerModel.CurrencyId Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" Disabled=@(_offerModel.PriceUponRequest == true) />
-                <RadzenCheckBox @bind-Value=@_offerModel.PriceUponRequest Name="PriceUponRequest" />
-                <RadzenLabel Text="При запитване" Component="PriceUponRequest" />
-            </div>
-
-            <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
-            <RadzenButton Text="Запази" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" />
-        </RadzenTemplateForm>
+        <p>Моля изчакайте...</p>
     }
-    else if (step == 2)
+    else if (!_carOfferModel.IsSuccess)
     {
-        <h2>Добави снимки</h2>
-        <p>Внимание: Можете да добавите снимки и на по-късен етап.</p>
-        <UploadPhotos />
-
-        <RadzenButton Text="Пропусни" Click=@OnSkipUpload />
+        <p>Тази обява не съществува или е временно недостъпна.</p>
     }
+    else
+    {
+            @if (step == 1)
+        {
+            <RadzenTemplateForm TItem="CreateCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
+                <div>
+                    <div class="EditCarOfferComponent__box">
+                    <span>Купе</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.CoupeId Data=@coupes TextProperty="Name" Placeholder="Купе" ValueProperty="Id" Name="Coupe" />
+                        <RadzenRequiredValidator Component="Coupe" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+
+                    <div class="EditCarOfferComponent__box">
+                    <span>Марка</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.BrandId Data=@brands TextProperty="Name" Placeholder="Марка" ValueProperty="Id" Name="Brand" Change=@OnCarBrandChange />
+                        <RadzenRequiredValidator Component="Brand" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+
+                    <div class="EditCarOfferComponent__box">
+                    <span>Модел</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.ModelId Data=@models TextProperty="Name" Placeholder="Модел" ValueProperty="Id" Name="Model" />
+                        <RadzenRequiredValidator Component="Model" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="EditCarOfferComponent__box">
+                    <span>Модификация</span>
+                        <RadzenTextBox Placeholder="Модификация" @bind-Value=@_offerModel.Modification />
+                    </div>
+                    <div class="EditCarOfferComponent__box">
+                    <span>Двигател</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.EngineId Data=@engines TextProperty="Name" Placeholder="Двигател" ValueProperty="Id" Name="Engine" />
+                        <RadzenRequiredValidator Component="Engine" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+                    <div class="EditCarOfferComponent__box">
+                    <span>Скоростна кутия</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.TransmissionId Data=@transmissions TextProperty="Name" Placeholder="Скоростна кутия" ValueProperty="Id" Name="Transmission" />
+                        <RadzenRequiredValidator Component="Transmission" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="EditCarOfferComponent__box">
+                    <span>Мощност (кс)</span>
+                        <RadzenNumeric Placeholder="Мощност (кс)" Min="1" Max="10000" @bind-Value=@_offerModel.Horsepower Name="Horsepower" />
+                        <RadzenRequiredValidator Component="Horsepower" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+
+                <div class="EditCarOfferComponent__box">
+                    <span>Кубатура (куб.см)</span>
+                        <RadzenNumeric Placeholder="Кубатура (куб.см)" Min="1" Max="10000" @bind-Value=@_offerModel.Cubics Name="Cubics" />
+                        <RadzenRequiredValidator Component="Cubics" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+
+                <div class="EditCarOfferComponent__box">
+                    <span>Пробег (км)</span>
+                        <RadzenNumeric Placeholder="Пробег (км)" Min="1" Max="5000000" @bind-Value=@_offerModel.Mileage Name="Mileage" />
+                        <RadzenRequiredValidator Component="Mileage" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+                </div>
+
+                <div>
+                <div class="EditCarOfferComponent__box">
+                    <span>Евростандарт</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.EuroStandardId Data=@euroStandards Placeholder="Евростандарт" TextProperty="Name" ValueProperty="Id" Name="Eurostandard" />
+                        <RadzenRequiredValidator Component="Eurostandard" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+
+                <div class="EditCarOfferComponent__box">
+                    <span>Салон</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.MaterialId Data=@interiorMaterials TextProperty="Name" Placeholder="Салон" ValueProperty="Id" Name="MaterialModel" />
+                        <RadzenRequiredValidator Component="MaterialModel" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+                </div>
+
+                <div>
+                <div class="EditCarOfferComponent__box">
+                    <span>Месец на производство</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.MonthProduced Data=@months Placeholder="Месец на производство" Name="MonthProduced" />
+                        <RadzenRequiredValidator Component="MonthProduced" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+
+                <div class="EditCarOfferComponent__box">
+                    <span>Година на производство</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.YearProduced Data=@years Placeholder="Година на производство" Name="YearProduced" />
+                        <RadzenRequiredValidator Component="YearProduced" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+                </div>
+
+                <div>
+                <div class="EditCarOfferComponent__box">
+                    <span>Регион</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.RegionId Data=@regions TextProperty="Name" Placeholder="Регион" ValueProperty="Id" Name="Region" Change=@OnRegionChange />
+                        <RadzenRequiredValidator Component="Region" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+                <div class="EditCarOfferComponent__box">
+                    <span>Населено място</span>
+                        <RadzenDropDown @bind-Value=@_offerModel.LocationId Data=@locations TextProperty="Name" Placeholder="Населено място" ValueProperty="Id" Name="Location" />
+                        <RadzenRequiredValidator Component="Location" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+                </div>
+
+            <div class="EditCarOfferComponent__box">
+                <span>VIN номер</span>
+                    <RadzenTextBox Placeholder="VIN номер" @bind-Value=@_offerModel.VIN class="vin-number" />
+                </div>
+
+                <div>
+                <div class="EditCarOfferComponent__box">
+                    <span>Състояние</span>
+                        <RadzenRadioButtonList @bind-Value=@_offerModel.Condition TValue="int" Name="Condition">
+                            <Items>
+                                <RadzenRadioButtonListItem Text="Нов" Value="1" />
+                                <RadzenRadioButtonListItem Text="Употребяван" Value="2" />
+                                <RadzenRadioButtonListItem Text="За части" Value="3" />
+                            </Items>
+                        </RadzenRadioButtonList>
+                        <RadzenRequiredValidator Component="Condition" Text="Задължително поле" Popup=@popup Style="position: absolute" />
+                    </div>
+                </div>
+                <div class="EditCarOfferComponent__box">
+                    <span>Състояние</span>
+                    <RadzenTextArea Placeholder="Описание..." @bind-Value=@_offerModel.Description />
+                </div>
+
+            <div class="EditCarOfferComponent__box">
+                <span>Цена</span>
+                    <RadzenNumeric Placeholder="Цена" Min="1" Max="20000000" @bind-Value=@_offerModel.Price Disabled=@(_offerModel.PriceUponRequest == true) />
+                    <RadzenDropDown @bind-Value=@_offerModel.CurrencyId Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" Disabled=@(_offerModel.PriceUponRequest == true) />
+                    <RadzenCheckBox @bind-Value=@_offerModel.PriceUponRequest Name="PriceUponRequest" />
+                    <RadzenLabel Text="При запитване" Component="PriceUponRequest" />
+                </div>
+
+                <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
+                <RadzenButton Text="Запази" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" />
+            </RadzenTemplateForm>
+        }
+        else if (step == 2)
+        {
+            <h2>Добави снимки</h2>
+            <p>Внимание: Можете да добавите снимки и на по-късен етап.</p>
+            <UploadPhotos />
+
+            <RadzenButton Text="Пропусни" Click=@OnSkipUpload />
+        }
+    }
+
 </div>
+
 
 @code {
     [Parameter]
     public string OfferId { get; set; }
 
-    private CarOfferModel _carOfferModel = new();
+    private ResultModel<CarOfferModel> _carOfferModel;
     private CreateCarOfferRequestModel _offerModel = new();
 
     bool popup = true;
@@ -211,11 +245,20 @@
     protected override async Task OnInitializedAsync()
     {
         // Get current car offer
-        _carOfferModel = (await OfferService.GetCarOfferAsync(OfferId)).Value;
+        _carOfferModel = await OfferService.GetCarOfferAsync(OfferId);
+
+        if (!_carOfferModel.IsSuccess)
+        {
+            return;
+        }
+
+        _offerModel = Mapper.Map<CreateCarOfferRequestModel>(_carOfferModel.Value);
 
         coupes = await CarCoupeService.GetAll();
 
         brands = await CarBrandService.GetAll();
+        models = await CarModelService.GetAll(_offerModel.BrandId);
+
         regions = await RegionService.GetAllRegions();
         engines = await EngineService.GetAll();
         currencies = await CurrencyService.GetAll();

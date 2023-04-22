@@ -36,7 +36,7 @@
         // Get offer type
         var category = await CategoryService.GetByOfferIdAsync(Id);
 
-        if (category.Name == CategoryTypeConstants.Cars)
+        if (category?.Name == CategoryTypeConstants.Cars)
         {
             _params = new() { { "OfferId", Id }, };
             selectedType = Type.GetType("Troshka.Blazor.Components.Offer.Car.EditCarOfferComponent");

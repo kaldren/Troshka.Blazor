@@ -124,7 +124,7 @@ namespace Troshka.Blazor
                 .ForPath(dest => dest.HasEmergencyTireKit, opt => opt.MapFrom(src => src.Filters.HasEmergencyTireKit))
                 .ForPath(dest => dest.HasPanoramicRoof, opt => opt.MapFrom(src => src.Filters.HasPanoramicRoof));
 
-
+            CreateMap<CarOfferModel, CreateCarOfferRequestModel>();
 
             CreateMap<OfferImageEntity, OfferImageModel>()
                 .ForPath(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Url));

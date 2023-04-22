@@ -3,13 +3,18 @@
     flex-direction: column;
 }
 
-    #EditCarOfferComponent ::deep form > div {
-        display: flex;
-        margin: 0.75rem 0;
-        align-items: center;
-    }
+#EditCarOfferComponent ::deep form > div {
+    display: flex;
+    margin: 0.75rem 0;
+}
+
+.EditCarOfferComponent__box {
+    display: flex;
+    flex-direction: column;
+}
 
 #EditCarOfferComponent ::deep .vin-number {
+    display: block;
     max-width: 100%;
     width: 300px;
 }
@@ -39,4 +44,9 @@
 
 #EditCarOfferComponent ::deep .rz-spinner-button {
     display: none
+}
+
+#EditCarOfferComponent ::deep button[type=submit] {
+    margin: 1rem auto 2rem;
+    width: 200px;
 }

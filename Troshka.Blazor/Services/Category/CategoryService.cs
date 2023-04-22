@@ -34,7 +34,7 @@ namespace Troshka.Blazor.Services.Category
                                        .FromSql($"Troshka.SP_GetOfferCategoriesByOfferId {offerId}")
                                        .ToListAsync();
 
-            return result.First();
+            return result.FirstOrDefault();
         }
     }
 }
