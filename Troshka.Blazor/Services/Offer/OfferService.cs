@@ -105,5 +105,45 @@ namespace Troshka.Blazor.Services.Offer
                 throw;
             }
         }
+
+        public async Task<ResultModel<CarOfferModel>> EditCarOfferAsync(EditCarOfferRequestModel model)
+        {
+            try
+            {
+                using var context = _dbFactory.CreateDbContext();
+                var old = await context.CarOffers.FirstOrDefaultAsync(p => p.Id == model.Id);
+
+                old.Description = model.Description;
+                //var entity = _mapper.Map<CarOfferEntity>(model);
+
+                context.CarOffers.Update(old);
+
+                var result = await context.SaveChangesAsync();
+
+                if (result > 0)
+                {
+                    var response = _mapper.Map<CarOfferModel>(old);
+                    return new ResultModel<CarOfferModel>
+                    {
+                        IsSuccess = true,
+                        Message = "Успешна операция.",
+                        Value = response
+                    };
+                }
+                else
+                {
+                    return new ResultModel<CarOfferModel>
+                    {
+                        IsSuccess = false,
+                        Message = "Неуспешна операция."
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -69,7 +69,7 @@
     {
             @if (step == 1)
         {
-            <RadzenTemplateForm TItem="CreateCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
+            <RadzenTemplateForm TItem="EditCarOfferRequestModel" Data=@_offerModel Submit="OnFormSubmit">
                 <div>
                     <div class="EditCarOfferComponent__box">
                     <span>Купе</span>
@@ -221,7 +221,7 @@
     public string OfferId { get; set; }
 
     private ResultModel<CarOfferModel> _carOfferModel;
-    private CreateCarOfferRequestModel _offerModel = new();
+    private EditCarOfferRequestModel _offerModel = new();
 
     bool popup = true;
     DateTime? dateProduced = DateTime.Now;
@@ -252,7 +252,7 @@
             return;
         }
 
-        _offerModel = Mapper.Map<CreateCarOfferRequestModel>(_carOfferModel.Value);
+        _offerModel = Mapper.Map<EditCarOfferRequestModel>(_carOfferModel.Value);
 
         coupes = await CarCoupeService.GetAll();
 
@@ -316,7 +316,7 @@
 
     }
 
-    async Task OnFormSubmit(CreateCarOfferRequestModel model)
+    async Task OnFormSubmit(EditCarOfferRequestModel model)
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
@@ -324,7 +324,7 @@
         model.Name = user.Claims?.FirstOrDefault(x => x.Type == "name").Value;
         model.Email = user?.Claims?.FirstOrDefault(x => x.Type == "emails")?.Value;
 
-        var result = await OfferService.CreateCarOfferAsync(model);
+        var result = await OfferService.EditCarOfferAsync(model);
 
         if (result.IsSuccess)
         {

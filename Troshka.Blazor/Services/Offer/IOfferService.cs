@@ -6,6 +6,7 @@ namespace Troshka.Blazor.Services.Offer
     public interface IOfferService
     {
         Task<ResultModel<CarOfferModel>> CreateCarOfferAsync(CreateCarOfferRequestModel model);
+        Task<ResultModel<CarOfferModel>> EditCarOfferAsync(EditCarOfferRequestModel model);
         Task<ResultModel<CarOfferModel>> GetCarOfferAsync(string id);
     }
 }
