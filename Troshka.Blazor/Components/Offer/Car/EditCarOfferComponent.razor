@@ -226,48 +226,45 @@
     bool popup = true;
     DateTime? dateProduced = DateTime.Now;
 
-    List<CoupeModel>? coupes;
-    List<BrandModel>? brands;
-    List<ModelModel>? models;
-    List<RegionModel>? regions;
-    List<LocationModel>? locations;
-    List<EngineModel>? engines;
-    List<TransmissionModel>? transmissions;
-    List<CurrencyModel>? currencies;
-    List<EuroStandardModel>? euroStandards;
-    List<MaterialModel>? interiorMaterials;
-    List<int>? months;
-    List<int>? years;
+    List<CoupeModel> coupes;
+    List<BrandModel> brands;
+    List<ModelModel> models;
+    List<RegionModel> regions;
+    List<LocationModel> locations;
+    List<EngineModel> engines;
+    List<TransmissionModel> transmissions;
+    List<CurrencyModel> currencies;
+    List<EuroStandardModel> euroStandards;
+    List<MaterialModel> interiorMaterials;
+    List<int> months;
+    List<int> years;
 
     string offerId2;
     private int step = 1;
 
     protected override async Task OnInitializedAsync()
     {
-        // Get current car offer
         _carOfferModel = await OfferService.GetCarOfferAsync(OfferId);
 
-        if (!_carOfferModel.IsSuccess)
+        if (_carOfferModel.IsSuccess)
         {
-            return;
+            _offerModel = Mapper.Map<EditCarOfferRequestModel>(_carOfferModel.Value);
+
+            coupes = await CarCoupeService.GetAll();
+
+            brands = await CarBrandService.GetAll();
+            models = await CarModelService.GetAll(_offerModel.BrandId);
+
+            regions = await RegionService.GetAllRegions();
+            engines = await EngineService.GetAll();
+            currencies = await CurrencyService.GetAll();
+            transmissions = await TransmissionService.GetAll();
+            euroStandards = await EuroStandardService.GetAll();
+            interiorMaterials = await MaterialService.GetAll();
+
+            months = GenerateMonths();
+            years = GenerateYears();
         }
-
-        _offerModel = Mapper.Map<EditCarOfferRequestModel>(_carOfferModel.Value);
-
-        coupes = await CarCoupeService.GetAll();
-
-        brands = await CarBrandService.GetAll();
-        models = await CarModelService.GetAll(_offerModel.BrandId);
-
-        regions = await RegionService.GetAllRegions();
-        engines = await EngineService.GetAll();
-        currencies = await CurrencyService.GetAll();
-        transmissions = await TransmissionService.GetAll();
-        euroStandards = await EuroStandardService.GetAll();
-        interiorMaterials = await MaterialService.GetAll();
-
-        months = GenerateMonths();
-        years = GenerateYears();
     }
 
     async Task OnCarBrandChange()

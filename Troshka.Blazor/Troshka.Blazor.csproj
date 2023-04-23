@@ -14,6 +14,7 @@
     <None Remove="Components\Offer\OfferFilters - Copy.razor.css" />
     <None Remove="Components\Offer\OfferFilters.razor.css" />
     <None Remove="Components\Offer\Options.razor.css" />
+    <None Remove="Components\Offer\Slideshow.razor.css" />
     <None Remove="Pages\Offer\CreateOffer.razor.css" />
   </ItemGroup>
 
@@ -21,6 +22,7 @@
     <Content Include="Components\Offer\Car\EditCarOfferComponent.razor.css" />
     <Content Include="Components\Offer\OfferFilters.razor.css" />
     <Content Include="Components\Offer\Options.razor.css" />
+    <Content Include="Components\Offer\Slideshow.razor.css" />
     <Content Include="Pages\Offer\CreateOffer.razor.css" />
   </ItemGroup>
 

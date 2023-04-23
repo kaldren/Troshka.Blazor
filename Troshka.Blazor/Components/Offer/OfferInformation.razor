@@ -13,6 +13,8 @@
 <div class="Components__OfferInformation">
     @if (Model != default)
     {
+        <h1>@Model.Brand @Model.Model</h1>
+
         <h2>@LocalizerOffer["Vehicle_Description"]</h2>
         <p>@Model.Description</p>
         <h2>@LocalizerOffer["Specification_Title"]</h2>

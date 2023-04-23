@@ -27,6 +27,10 @@
             <Contact Model="@_contactModel" />
         </aside>
     }
+    else
+    {
+        <p>Тази обява не съществува или е временно недостъпна.</p>
+    }
 </div>
 
 @code {
@@ -52,6 +56,10 @@
                 Email = _carOfferModel.AuthorEmail,
                 Phone = _carOfferModel.AuthorPhone
             };
+        }
+        catch(Exception ex)
+        {
+            // Logging...
         }
         finally
         {
