@@ -200,7 +200,7 @@
                 </div>
 
                 <RadzenButton Text="Филтри" ButtonStyle="ButtonStyle.Secondary" Click=@ShowFiltersDialog class="FiltersButton" />
-                <RadzenButton Text="Запази" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" />
+                <RadzenButton Text="Запази" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Disabled=@_isFormSubmitted />
             </RadzenTemplateForm>
         }
         else if (step == 2)
@@ -240,6 +240,7 @@
     List<int> years;
 
     string offerId2;
+    private bool _isFormSubmitted;
     private int step = 1;
 
     protected override async Task OnInitializedAsync()
@@ -315,18 +316,22 @@
 
     async Task OnFormSubmit(EditCarOfferRequestModel model)
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        model.AuthorId = user.Claims.FirstOrDefault(x => x.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier")?.Value;
-        model.Name = user.Claims?.FirstOrDefault(x => x.Type == "name").Value;
-        model.Email = user?.Claims?.FirstOrDefault(x => x.Type == "emails")?.Value;
-
-        var result = await OfferService.EditCarOfferAsync(model);
-
-        if (result.IsSuccess)
+        if (!_isFormSubmitted)
         {
-            offerId2 = result.Value.Id;
-            step++;
+            _isFormSubmitted = true;
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            model.AuthorId = user.Claims.FirstOrDefault(x => x.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier")?.Value;
+            model.Name = user.Claims?.FirstOrDefault(x => x.Type == "name").Value;
+            model.Email = user?.Claims?.FirstOrDefault(x => x.Type == "emails")?.Value;
+
+            var result = await OfferService.EditCarOfferAsync(model);
+
+            if (result.IsSuccess)
+            {
+                offerId2 = result.Value.Id;
+                step++;
+            }
         }
     }
 

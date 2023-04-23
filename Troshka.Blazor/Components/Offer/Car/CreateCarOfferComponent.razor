@@ -200,6 +200,7 @@
     List<int>? years;
 
     string offerId;
+    private bool _isFormSubmitted;
     private int step = 1;
 
     protected override async Task OnInitializedAsync()
@@ -267,18 +268,22 @@
 
     async Task OnFormSubmit(CreateCarOfferRequestModel model)
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        model.AuthorId = user.Claims.FirstOrDefault(x => x.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier")?.Value;
-        model.Name = user.Claims?.FirstOrDefault(x => x.Type == "name").Value;
-        model.Email = user?.Claims?.FirstOrDefault(x => x.Type == "emails")?.Value;
-
-        var result = await OfferService.CreateCarOfferAsync(model);
-
-        if (result.IsSuccess)
+        if (!_isFormSubmitted)
         {
-            offerId = result.Value.Id;
-            step++;
+            _isFormSubmitted = true;
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            model.AuthorId = user.Claims.FirstOrDefault(x => x.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier")?.Value;
+            model.Name = user.Claims?.FirstOrDefault(x => x.Type == "name").Value;
+            model.Email = user?.Claims?.FirstOrDefault(x => x.Type == "emails")?.Value;
+
+            var result = await OfferService.CreateCarOfferAsync(model);
+
+            if (result.IsSuccess)
+            {
+                offerId = result.Value.Id;
+                step++;
+            }
         }
     }
 
