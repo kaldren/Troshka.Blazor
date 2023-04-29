@@ -1,3 +1,4 @@
+using Blazored.Toast;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
@@ -63,6 +64,7 @@ builder.Services.AddScoped<IFileStorage, FileStorage>();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 #endregion
 
+builder.Services.AddBlazoredToast();
 
 var app = builder.Build();
 

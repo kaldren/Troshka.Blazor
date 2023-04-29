@@ -1,6 +1,8 @@
 ﻿@namespace Troshka.Blazor.Components.Offer.Car
 
+@using Blazored.Toast.Services;
 @using Radzen;
+@using Troshka.Blazor.Configuration;
 @using Troshka.Blazor.Models;
 @using Troshka.Blazor.Models.Brand;
 @using Troshka.Blazor.Models.Category;
@@ -24,22 +26,6 @@
 @using Troshka.Blazor.Services.Transmission;
 @using Troshka.Blazor.Models.Offer.Car;
 
-@using Troshka.Blazor.Models.Brand;
-@using Troshka.Blazor.Models.Coupe;
-@using Troshka.Blazor.Models.Currency;
-@using Troshka.Blazor.Models.Engine;
-@using Troshka.Blazor.Models.Model;
-@using Troshka.Blazor.Models.Offer.Car;
-@using Troshka.Blazor.Models.Offer.Car;
-@using Troshka.Blazor.Models.Region;
-@using Troshka.Blazor.Models.Transmission;
-@using Troshka.Blazor.Services.Category;
-@using Troshka.Blazor.Services.Coupe;
-@using Troshka.Blazor.Services.Currency;
-@using Troshka.Blazor.Services.Engine;
-@using Troshka.Blazor.Services.Region;
-@using Troshka.Blazor.Services.Transmission;
-
 @inject NavigationManager Navigation
 @inject DialogService DialogService
 @inject ICarCoupeService CarCoupeService
@@ -53,6 +39,7 @@
 @inject IMaterialService MaterialService
 @inject IOfferService OfferService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IToastService ToastService
 
 <div id="CreateCarOfferComponent">
     @if (step == 1)
@@ -90,17 +77,17 @@
 
         <div>
             <div>
-                <RadzenNumeric Placeholder="Мощност (кс)" Min="1" Max="10000" @bind-Value=@_offerModel.Horsepower Name="Horsepower" />
+                <RadzenNumeric Placeholder="Мощност (кс)" Min=OfferConstants.CarsMinHorsepower Max=OfferConstants.CarsMaxHorsepower @bind-Value=@_offerModel.Horsepower Name="Horsepower" />
                 <RadzenRequiredValidator Component="Horsepower" Text="Задължително поле" Popup=@popup Style="position: absolute" />
             </div>
 
             <div>
-                <RadzenNumeric Placeholder="Кубатура (куб.см)" Min="1" Max="10000" @bind-Value=@_offerModel.Cubics Name="Cubics" />
+                <RadzenNumeric Placeholder="Кубатура (куб.см)" Min=OfferConstants.CarsMinCubics Max=OfferConstants.CarsMaxCubics @bind-Value=@_offerModel.Cubics Name="Cubics" />
                 <RadzenRequiredValidator Component="Cubics" Text="Задължително поле" Popup=@popup Style="position: absolute" />
             </div>
             
             <div>
-                <RadzenNumeric Placeholder="Пробег (км)" Min="1" Max="5000000" @bind-Value=@_offerModel.Mileage Name="Mileage" />
+                <RadzenNumeric Placeholder="Пробег (км)" Min=OfferConstants.CarsMinMileage Max=OfferConstants.CarsMaxMileage @bind-Value=@_offerModel.Mileage Name="Mileage" />
                 <RadzenRequiredValidator Component="Mileage" Text="Задължително поле" Popup=@popup Style="position: absolute" />
             </div>
         </div>
@@ -160,7 +147,7 @@
             <RadzenTextArea Placeholder="Описание..." @bind-Value=@_offerModel.Description />
 
         <div>
-            <RadzenNumeric Placeholder="Цена" Min="1" Max="20000000" @bind-Value=@_offerModel.Price Disabled=@(_offerModel.PriceUponRequest == true) />
+            <RadzenNumeric Placeholder="Цена" Min=OfferConstants.CarsMinPrice Max=OfferConstants.CarsMaxPrice @bind-Value=@_offerModel.Price Disabled=@(_offerModel.PriceUponRequest == true) />
             <RadzenDropDown @bind-Value=@_offerModel.CurrencyId Data=@currencies TextProperty="Name" Placeholder="Валута" ValueProperty="Id" Disabled=@(_offerModel.PriceUponRequest == true) />
             <RadzenCheckBox @bind-Value=@_offerModel.PriceUponRequest Name="PriceUponRequest" />
             <RadzenLabel Text="При запитване" Component="PriceUponRequest" />
@@ -186,18 +173,18 @@
     bool popup = true;
     DateTime? dateProduced = DateTime.Now;
 
-    List<CoupeModel>? coupes;
-    List<BrandModel>? brands;
-    List<ModelModel>? models;
-    List<RegionModel>? regions;
-    List<LocationModel>? locations;
-    List<EngineModel>? engines;
-    List<TransmissionModel>? transmissions;
-    List<CurrencyModel>? currencies;
-    List<EuroStandardModel>? euroStandards;
-    List<MaterialModel>? interiorMaterials;
-    List<int>? months;
-    List<int>? years;
+    List<CoupeModel> coupes;
+    List<BrandModel> brands;
+    List<ModelModel> models;
+    List<RegionModel> regions;
+    List<LocationModel> locations;
+    List<EngineModel> engines;
+    List<TransmissionModel> transmissions;
+    List<CurrencyModel> currencies;
+    List<EuroStandardModel> euroStandards;
+    List<MaterialModel> interiorMaterials;
+    List<int> months;
+    List<int> years;
 
     string offerId;
     private bool _isFormSubmitted;
@@ -209,15 +196,14 @@
 
         coupes = await CarCoupeService.GetAll();
         brands = await CarBrandService.GetAll();
-        regions = await RegionService.GetAllRegions();
         engines = await EngineService.GetAll();
-        currencies = await CurrencyService.GetAll();
         transmissions = await TransmissionService.GetAll();
         euroStandards = await EuroStandardService.GetAll();
         interiorMaterials = await MaterialService.GetAll();
-
         months = GenerateMonths();
         years = GenerateYears();
+        regions = await RegionService.GetAllRegions();
+        currencies = await CurrencyService.GetAll();
     }
 
     async Task OnCarBrandChange()
@@ -248,7 +234,7 @@
     {
         List<int> years = new();
 
-        for (int i = DateTime.Now.Year; i >= 1900; i--)
+        for (int i = DateTime.Now.Year; i >= OfferConstants.MinYear; i--)
         {
             years.Add(i);
         }
@@ -276,6 +262,7 @@
             model.AuthorId = user.Claims.FirstOrDefault(x => x.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier")?.Value;
             model.Name = user.Claims?.FirstOrDefault(x => x.Type == "name").Value;
             model.Email = user?.Claims?.FirstOrDefault(x => x.Type == "emails")?.Value;
+            model.BrandId = null;
 
             var result = await OfferService.CreateCarOfferAsync(model);
 
@@ -283,6 +270,10 @@
             {
                 offerId = result.Value.Id;
                 step++;
+            }
+            else
+            {
+                ToastService.ShowError(result.Message);
             }
         }
     }

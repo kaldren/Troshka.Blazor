@@ -26,7 +26,7 @@ namespace Troshka.Blazor.Domain.Entities.Car
         public virtual EuroStandardEntity EuroStandard { get; set; }
         public string? CurrencyId { get; set; }
         public virtual CurrencyEntity? Currency { get; set; }
-        public virtual ICollection<OfferImageEntity>? Images { get; set; }
+        public virtual ICollection<OfferImageEntity> Images { get; set; }
         public string AuthorId { get; set; }
         public virtual UserEntity Author { get; set; }
         public string CategoryId { get; set; }

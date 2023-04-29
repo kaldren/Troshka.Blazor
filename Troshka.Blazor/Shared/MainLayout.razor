@@ -1,8 +1,16 @@
-﻿@inherits LayoutComponentBase
+﻿@using Blazored.Toast
+@using Blazored.Toast.Configuration;
+@inherits LayoutComponentBase
 
 <PageTitle>Troshka.Blazor</PageTitle>
 
 <div class="page">
+    <BlazoredToasts Position="ToastPosition.BottomRight"
+                Timeout="10"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa fa-thumbs-up"
+                ErrorIcon="fa fa-bug" />
     <RadzenDialog />
     <div class="sidebar">
         <NavMenu />

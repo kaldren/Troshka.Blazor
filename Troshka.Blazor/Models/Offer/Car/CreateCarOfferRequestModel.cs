@@ -1,47 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Troshka.Blazor.Models.Offer.Car
+﻿namespace Troshka.Blazor.Models.Offer.Car
 {
     public class CreateCarOfferRequestModel
     {
-        [Required]
         public string AuthorId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-
-        [Required]
         public string CoupeId { get; set; }
-        [Required]
         public string BrandId { get; set; }
-        [Required]
         public string ModelId { get; set; }
-        public string Modification { get; set; }
-        [Required]
+        public string? Modification { get; set; }
         public string EngineId { get; set; }
-        [Required]
         public string TransmissionId { get; set; }
-        [Required]
         public string MaterialId { get; set; }
-        [Required]
         public string RegionId { get; set; }
-        [Required]
         public string LocationId { get; set; }
-        public string VIN { get; set; }
-        [Required]
+        public string? VIN { get; set; }
         public string EuroStandardId { get; set; }
-        public string CurrencyId { get; set; }
-        public string Description { get; set; }
-        [Required]
+        public string? CurrencyId { get; set; }
+        public string? Description { get; set; }
         public int? Horsepower { get; set; }
-        [Required]
         public int? Mileage { get; set; }
-        [Required]
         public int? MonthProduced { get; set; }
-        [Required]
         public int? YearProduced { get; set; }
-        [Required]
         public int Condition { get; set; }
-        [Required]
         public int? Cubics { get; set; }
         public decimal? Price { get; set; }
         public bool PriceUponRequest { get; set; }
