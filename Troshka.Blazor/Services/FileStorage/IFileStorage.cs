@@ -1,7 +1,9 @@
-﻿namespace Troshka.Blazor.Services.FileStorage
+﻿using Troshka.Blazor.Models;
+
+namespace Troshka.Blazor.Services.FileStorage
 {
     public interface IFileStorage
     {
-        Task<bool> StoreAsync(IFormFile[] files);
+        Task<ResultModel<bool>> StoreAsync(IFormFile[] files);
     }
 }

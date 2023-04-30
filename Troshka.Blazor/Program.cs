@@ -56,7 +56,7 @@ builder.Services.AddScoped<ITransmissionService, TransmissionService>();
 builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 builder.Services.AddScoped<IEuroStandardService, EuroStandardService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
-builder.Services.AddScoped<IOfferService, OfferService>();
+builder.Services.AddScoped<IOfferService, CarOfferService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileStorage, FileStorage>();
 

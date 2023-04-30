@@ -6,7 +6,7 @@
         public string Message { get; set; }
     }
 
-    public class ResultModel<T> : ResultModel where T : class
+    public class ResultModel<T> : ResultModel
     {
         public T Value { get; set; }
     }

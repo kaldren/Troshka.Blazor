@@ -10,13 +10,13 @@ using Troshka.Blazor.Services.User;
 
 namespace Troshka.Blazor.Services.Offer
 {
-    public class OfferService : IOfferService
+    public class CarOfferService : IOfferService
     {
         private readonly IDbContextFactory<TroshkaDbContext> _dbFactory;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
-        public OfferService(IDbContextFactory<TroshkaDbContext> dbFactory, IMapper mapper, IUserService userService)
+        public CarOfferService(IDbContextFactory<TroshkaDbContext> dbFactory, IMapper mapper, IUserService userService)
         {
             _dbFactory = dbFactory;
             _mapper = mapper;
@@ -32,7 +32,7 @@ namespace Troshka.Blazor.Services.Offer
                 return new ResultModel<CarOfferModel?>
                 {
                     IsSuccess = false,
-                    Message = "Неуспешна операция.",
+                    Message = MessageConstants.OperationFailedTryLater,
                     Value = null
                 };
             }
@@ -62,7 +62,7 @@ namespace Troshka.Blazor.Services.Offer
                     return new ResultModel<CarOfferModel>
                     {
                         IsSuccess = true,
-                        Message = "Успешна операция.",
+                        Message = MessageConstants.OperationSuccessful,
                         Value = response
                     };
                 }
@@ -71,7 +71,7 @@ namespace Troshka.Blazor.Services.Offer
                     return new ResultModel<CarOfferModel>
                     {
                         IsSuccess = false,
-                        Message = "Неуспешна операция."
+                        Message = MessageConstants.OperationFailedTryLater
                     };
                 }
             }
@@ -100,7 +100,7 @@ namespace Troshka.Blazor.Services.Offer
                     return new ResultModel<CarOfferModel>
                     {
                         IsSuccess = true,
-                        Message = "Успешна операция.",
+                        Message = MessageConstants.OperationFailedTryLater,
                         Value = response
                     };
                 }
@@ -109,7 +109,7 @@ namespace Troshka.Blazor.Services.Offer
                     return new ResultModel<CarOfferModel>
                     {
                         IsSuccess = false,
-                        Message = "Неуспешна операция."
+                        Message = MessageConstants.OperationFailedTryLater
                     };
                 }
             }
@@ -140,7 +140,7 @@ namespace Troshka.Blazor.Services.Offer
                         return new ResultModel<CarOfferModel>
                         {
                             IsSuccess = true,
-                            Message = "Успешна операция.",
+                            Message = MessageConstants.OperationFailedTryLater,
                             Value = response
                         };
                     }
@@ -149,7 +149,7 @@ namespace Troshka.Blazor.Services.Offer
                         return new ResultModel<CarOfferModel>
                         {
                             IsSuccess = false,
-                            Message = "Неуспешна операция."
+                            Message = MessageConstants.OperationFailedTryLater
                         };
                     }
                 }

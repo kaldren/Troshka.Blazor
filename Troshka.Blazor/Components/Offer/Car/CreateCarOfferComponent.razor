@@ -37,7 +37,7 @@
 @inject ICurrencyService CurrencyService
 @inject IEuroStandardService EuroStandardService
 @inject IMaterialService MaterialService
-@inject IOfferService OfferService
+@inject IOfferService CarOfferService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IToastService ToastService
 
@@ -160,7 +160,7 @@
     else if (step == 2)
     {
         <h2>Добави снимки</h2>
-        <p>Внимание: Можете да добавите снимки и на по-късен етап.</p>
+        <p>Добавете до 15 снимки или натиснете пропусни, ако желаете да направите това по-късно.</p>
         <UploadPhotos />
 
         <RadzenButton Text="Пропусни" Click=@OnSkipUpload />
@@ -188,7 +188,7 @@
 
     string offerId;
     private bool _isFormSubmitted;
-    private int step = 1;
+    private int step = 2;
 
     protected override async Task OnInitializedAsync()
     {
@@ -264,7 +264,7 @@
             model.Email = user?.Claims?.FirstOrDefault(x => x.Type == "emails")?.Value;
             model.BrandId = null;
 
-            var result = await OfferService.CreateCarOfferAsync(model);
+            var result = await CarOfferService.CreateCarOfferAsync(model);
 
             if (result.IsSuccess)
             {
